@@ -65,16 +65,6 @@
           <Property Name="Id_Categorias" Type="int" Nullable="false" />
           <Property Name="Id_Menu" Type="int" />
         </EntityType>
-        <EntityType Name="sysdiagrams">
-          <Key>
-            <PropertyRef Name="diagram_id" />
-          </Key>
-          <Property Name="name" Type="nvarchar" MaxLength="128" Nullable="false" />
-          <Property Name="principal_id" Type="int" Nullable="false" />
-          <Property Name="diagram_id" Type="int" StoreGeneratedPattern="Identity" Nullable="false" />
-          <Property Name="version" Type="int" />
-          <Property Name="definition" Type="varbinary(max)" />
-        </EntityType>
         <EntityType Name="Ubicaciones">
           <Key>
             <PropertyRef Name="Id_Ubicacion" />
@@ -202,7 +192,6 @@
           <EntitySet Name="Platos" EntityType="Self.Platos" Schema="dbo" store:Type="Tables" />
           <EntitySet Name="Postres" EntityType="Self.Postres" Schema="dbo" store:Type="Tables" />
           <EntitySet Name="Restaurantes" EntityType="Self.Restaurantes" Schema="dbo" store:Type="Tables" />
-          <EntitySet Name="sysdiagrams" EntityType="Self.sysdiagrams" Schema="dbo" store:Type="Tables" />
           <EntitySet Name="Ubicaciones" EntityType="Self.Ubicaciones" Schema="dbo" store:Type="Tables" />
           <AssociationSet Name="FK_Menus_Categorias" Association="Self.FK_Menus_Categorias">
             <End Role="Categorias" EntitySet="Categorias" />
@@ -246,7 +235,7 @@
     <!-- CSDL content -->
     <edmx:ConceptualModels>
       <Schema Namespace="RestauranteModel" Alias="Self" annotation:UseStrongSpatialTypes="false" xmlns:annotation="http://schemas.microsoft.com/ado/2009/02/edm/annotation" xmlns:customannotation="http://schemas.microsoft.com/ado/2013/11/edm/customannotation" xmlns="http://schemas.microsoft.com/ado/2009/11/edm">
-        <EntityType Name="Bebidas">
+        <EntityType Name="Bebida">
           <Key>
             <PropertyRef Name="Id_Bebidas" />
           </Key>
@@ -254,7 +243,7 @@
           <Property Name="Descripcion_Bebidas" Type="String" MaxLength="50" FixedLength="false" Unicode="true" Nullable="false" />
           <NavigationProperty Name="Platos" Relationship="Self.FK_Platos_Bebidas" FromRole="Bebidas" ToRole="Platos" />
         </EntityType>
-        <EntityType Name="Categorias">
+        <EntityType Name="Categoria">
           <Key>
             <PropertyRef Name="Id_Categoria" />
           </Key>
@@ -263,7 +252,7 @@
           <NavigationProperty Name="Menus" Relationship="Self.FK_Menus_Categorias" FromRole="Categorias" ToRole="Menus" />
           <NavigationProperty Name="Restaurantes" Relationship="Self.FK_Restaurantes_Categorias" FromRole="Categorias" ToRole="Restaurantes" />
         </EntityType>
-        <EntityType Name="Ensaladas">
+        <EntityType Name="Ensalada">
           <Key>
             <PropertyRef Name="Id_Ensaladas" />
           </Key>
@@ -271,19 +260,19 @@
           <Property Name="Descripcion_Ensaladas" Type="String" MaxLength="50" FixedLength="false" Unicode="true" Nullable="false" />
           <NavigationProperty Name="Platos" Relationship="Self.FK_Platos_Ensaladas" FromRole="Ensaladas" ToRole="Platos" />
         </EntityType>
-        <EntityType Name="Menus">
+        <EntityType Name="Menu">
           <Key>
             <PropertyRef Name="Id_Menu" />
           </Key>
           <Property Name="Id_Menu" Type="Int32" Nullable="false" />
           <Property Name="Id_Categorias" Type="Int32" Nullable="false" />
           <Property Name="Id_Plato" Type="Int32" />
-          <NavigationProperty Name="Categorias" Relationship="Self.FK_Menus_Categorias" FromRole="Menus" ToRole="Categorias" />
-          <NavigationProperty Name="Platos" Relationship="Self.FK_Menus_Platos" FromRole="Menus" ToRole="Platos" />
-          <NavigationProperty Name="Platos1" Relationship="Self.FK_Platos_Menus" FromRole="Menus" ToRole="Platos" />
+          <NavigationProperty Name="Categoria" Relationship="Self.FK_Menus_Categorias" FromRole="Menus" ToRole="Categorias" />
+          <NavigationProperty Name="Plato" Relationship="Self.FK_Menus_Platos" FromRole="Menus" ToRole="Platos" />
+          <NavigationProperty Name="Platos" Relationship="Self.FK_Platos_Menus" FromRole="Menus" ToRole="Platos" />
           <NavigationProperty Name="Restaurantes" Relationship="Self.FK_Restaurantes_Menus" FromRole="Menus" ToRole="Restaurantes" />
         </EntityType>
-        <EntityType Name="Platos">
+        <EntityType Name="Plato">
           <Key>
             <PropertyRef Name="Id_Plato" />
           </Key>
@@ -297,13 +286,13 @@
           <Property Name="Promocion_Plato" Type="Boolean" />
           <Property Name="Valor_Plato" Type="Decimal" Precision="19" Scale="4" Nullable="false" />
           <Property Name="Imagen" Type="String" MaxLength="300" FixedLength="false" Unicode="true" />
-          <NavigationProperty Name="Bebidas" Relationship="Self.FK_Platos_Bebidas" FromRole="Platos" ToRole="Bebidas" />
-          <NavigationProperty Name="Ensaladas" Relationship="Self.FK_Platos_Ensaladas" FromRole="Platos" ToRole="Ensaladas" />
+          <NavigationProperty Name="Bebida" Relationship="Self.FK_Platos_Bebidas" FromRole="Platos" ToRole="Bebidas" />
+          <NavigationProperty Name="Ensalada" Relationship="Self.FK_Platos_Ensaladas" FromRole="Platos" ToRole="Ensaladas" />
           <NavigationProperty Name="Menus" Relationship="Self.FK_Menus_Platos" FromRole="Platos" ToRole="Menus" />
-          <NavigationProperty Name="Menus1" Relationship="Self.FK_Platos_Menus" FromRole="Platos" ToRole="Menus" />
-          <NavigationProperty Name="Postres" Relationship="Self.FK_Platos_Postres" FromRole="Platos" ToRole="Postres" />
+          <NavigationProperty Name="Menu" Relationship="Self.FK_Platos_Menus" FromRole="Platos" ToRole="Menus" />
+          <NavigationProperty Name="Postre" Relationship="Self.FK_Platos_Postres" FromRole="Platos" ToRole="Postres" />
         </EntityType>
-        <EntityType Name="Postres">
+        <EntityType Name="Postre">
           <Key>
             <PropertyRef Name="Id_Postres" />
           </Key>
@@ -311,7 +300,7 @@
           <Property Name="Descripcion_Postres" Type="String" MaxLength="50" FixedLength="false" Unicode="true" Nullable="false" />
           <NavigationProperty Name="Platos" Relationship="Self.FK_Platos_Postres" FromRole="Postres" ToRole="Platos" />
         </EntityType>
-        <EntityType Name="Restaurantes">
+        <EntityType Name="Restaurante">
           <Key>
             <PropertyRef Name="Id_Restaurante" />
           </Key>
@@ -319,21 +308,11 @@
           <Property Name="Nombre" Type="String" MaxLength="200" FixedLength="false" Unicode="true" Nullable="false" />
           <Property Name="Id_Categorias" Type="Int32" Nullable="false" />
           <Property Name="Id_Menu" Type="Int32" />
-          <NavigationProperty Name="Categorias" Relationship="Self.FK_Restaurantes_Categorias" FromRole="Restaurantes" ToRole="Categorias" />
-          <NavigationProperty Name="Menus" Relationship="Self.FK_Restaurantes_Menus" FromRole="Restaurantes" ToRole="Menus" />
+          <NavigationProperty Name="Categoria" Relationship="Self.FK_Restaurantes_Categorias" FromRole="Restaurantes" ToRole="Categorias" />
+          <NavigationProperty Name="Menu" Relationship="Self.FK_Restaurantes_Menus" FromRole="Restaurantes" ToRole="Menus" />
           <NavigationProperty Name="Ubicaciones" Relationship="Self.FK_Ubicaciones_Restaurantes" FromRole="Restaurantes" ToRole="Ubicaciones" />
         </EntityType>
-        <EntityType Name="sysdiagrams">
-          <Key>
-            <PropertyRef Name="diagram_id" />
-          </Key>
-          <Property Name="name" Type="String" MaxLength="128" FixedLength="false" Unicode="true" Nullable="false" />
-          <Property Name="principal_id" Type="Int32" Nullable="false" />
-          <Property Name="diagram_id" Type="Int32" Nullable="false" annotation:StoreGeneratedPattern="Identity" />
-          <Property Name="version" Type="Int32" />
-          <Property Name="definition" Type="Binary" MaxLength="Max" FixedLength="false" />
-        </EntityType>
-        <EntityType Name="Ubicaciones">
+        <EntityType Name="Ubicacione">
           <Key>
             <PropertyRef Name="Id_Ubicacion" />
           </Key>
@@ -343,11 +322,11 @@
           <Property Name="Telefono1" Type="Int32" Nullable="false" />
           <Property Name="Telefono2" Type="Int32" />
           <Property Name="Correo" Type="String" MaxLength="50" FixedLength="false" Unicode="true" />
-          <NavigationProperty Name="Restaurantes" Relationship="Self.FK_Ubicaciones_Restaurantes" FromRole="Ubicaciones" ToRole="Restaurantes" />
+          <NavigationProperty Name="Restaurante" Relationship="Self.FK_Ubicaciones_Restaurantes" FromRole="Ubicaciones" ToRole="Restaurantes" />
         </EntityType>
         <Association Name="FK_Platos_Bebidas">
-          <End Role="Bebidas" Type="Self.Bebidas" Multiplicity="0..1" />
-          <End Role="Platos" Type="Self.Platos" Multiplicity="*" />
+          <End Role="Bebidas" Type="Self.Bebida" Multiplicity="0..1" />
+          <End Role="Platos" Type="Self.Plato" Multiplicity="*" />
           <ReferentialConstraint>
             <Principal Role="Bebidas">
               <PropertyRef Name="Id_Bebidas" />
@@ -358,8 +337,8 @@
           </ReferentialConstraint>
         </Association>
         <Association Name="FK_Menus_Categorias">
-          <End Role="Categorias" Type="Self.Categorias" Multiplicity="1" />
-          <End Role="Menus" Type="Self.Menus" Multiplicity="*" />
+          <End Role="Categorias" Type="Self.Categoria" Multiplicity="1" />
+          <End Role="Menus" Type="Self.Menu" Multiplicity="*" />
           <ReferentialConstraint>
             <Principal Role="Categorias">
               <PropertyRef Name="Id_Categoria" />
@@ -370,8 +349,8 @@
           </ReferentialConstraint>
         </Association>
         <Association Name="FK_Restaurantes_Categorias">
-          <End Role="Categorias" Type="Self.Categorias" Multiplicity="1" />
-          <End Role="Restaurantes" Type="Self.Restaurantes" Multiplicity="*" />
+          <End Role="Categorias" Type="Self.Categoria" Multiplicity="1" />
+          <End Role="Restaurantes" Type="Self.Restaurante" Multiplicity="*" />
           <ReferentialConstraint>
             <Principal Role="Categorias">
               <PropertyRef Name="Id_Categoria" />
@@ -382,8 +361,8 @@
           </ReferentialConstraint>
         </Association>
         <Association Name="FK_Platos_Ensaladas">
-          <End Role="Ensaladas" Type="Self.Ensaladas" Multiplicity="0..1" />
-          <End Role="Platos" Type="Self.Platos" Multiplicity="*" />
+          <End Role="Ensaladas" Type="Self.Ensalada" Multiplicity="0..1" />
+          <End Role="Platos" Type="Self.Plato" Multiplicity="*" />
           <ReferentialConstraint>
             <Principal Role="Ensaladas">
               <PropertyRef Name="Id_Ensaladas" />
@@ -394,8 +373,8 @@
           </ReferentialConstraint>
         </Association>
         <Association Name="FK_Menus_Platos">
-          <End Role="Platos" Type="Self.Platos" Multiplicity="0..1" />
-          <End Role="Menus" Type="Self.Menus" Multiplicity="*" />
+          <End Role="Platos" Type="Self.Plato" Multiplicity="0..1" />
+          <End Role="Menus" Type="Self.Menu" Multiplicity="*" />
           <ReferentialConstraint>
             <Principal Role="Platos">
               <PropertyRef Name="Id_Plato" />
@@ -406,8 +385,8 @@
           </ReferentialConstraint>
         </Association>
         <Association Name="FK_Platos_Menus">
-          <End Role="Menus" Type="Self.Menus" Multiplicity="1" />
-          <End Role="Platos" Type="Self.Platos" Multiplicity="*" />
+          <End Role="Menus" Type="Self.Menu" Multiplicity="1" />
+          <End Role="Platos" Type="Self.Plato" Multiplicity="*" />
           <ReferentialConstraint>
             <Principal Role="Menus">
               <PropertyRef Name="Id_Menu" />
@@ -418,8 +397,8 @@
           </ReferentialConstraint>
         </Association>
         <Association Name="FK_Restaurantes_Menus">
-          <End Role="Menus" Type="Self.Menus" Multiplicity="0..1" />
-          <End Role="Restaurantes" Type="Self.Restaurantes" Multiplicity="*" />
+          <End Role="Menus" Type="Self.Menu" Multiplicity="0..1" />
+          <End Role="Restaurantes" Type="Self.Restaurante" Multiplicity="*" />
           <ReferentialConstraint>
             <Principal Role="Menus">
               <PropertyRef Name="Id_Menu" />
@@ -430,8 +409,8 @@
           </ReferentialConstraint>
         </Association>
         <Association Name="FK_Platos_Postres">
-          <End Role="Postres" Type="Self.Postres" Multiplicity="0..1" />
-          <End Role="Platos" Type="Self.Platos" Multiplicity="*" />
+          <End Role="Postres" Type="Self.Postre" Multiplicity="0..1" />
+          <End Role="Platos" Type="Self.Plato" Multiplicity="*" />
           <ReferentialConstraint>
             <Principal Role="Postres">
               <PropertyRef Name="Id_Postres" />
@@ -442,8 +421,8 @@
           </ReferentialConstraint>
         </Association>
         <Association Name="FK_Ubicaciones_Restaurantes">
-          <End Role="Restaurantes" Type="Self.Restaurantes" Multiplicity="1" />
-          <End Role="Ubicaciones" Type="Self.Ubicaciones" Multiplicity="*" />
+          <End Role="Restaurantes" Type="Self.Restaurante" Multiplicity="1" />
+          <End Role="Ubicaciones" Type="Self.Ubicacione" Multiplicity="*" />
           <ReferentialConstraint>
             <Principal Role="Restaurantes">
               <PropertyRef Name="Id_Restaurante" />
@@ -454,15 +433,14 @@
           </ReferentialConstraint>
         </Association>
         <EntityContainer Name="RestauranteEntities" annotation:LazyLoadingEnabled="true">
-          <EntitySet Name="Bebidas" EntityType="Self.Bebidas" />
-          <EntitySet Name="Categorias" EntityType="Self.Categorias" />
-          <EntitySet Name="Ensaladas" EntityType="Self.Ensaladas" />
-          <EntitySet Name="Menus" EntityType="Self.Menus" />
-          <EntitySet Name="Platos" EntityType="Self.Platos" />
-          <EntitySet Name="Postres" EntityType="Self.Postres" />
-          <EntitySet Name="Restaurantes" EntityType="Self.Restaurantes" />
-          <EntitySet Name="sysdiagrams" EntityType="Self.sysdiagrams" />
-          <EntitySet Name="Ubicaciones" EntityType="Self.Ubicaciones" />
+          <EntitySet Name="Bebidas" EntityType="Self.Bebida" />
+          <EntitySet Name="Categorias" EntityType="Self.Categoria" />
+          <EntitySet Name="Ensaladas" EntityType="Self.Ensalada" />
+          <EntitySet Name="Menus" EntityType="Self.Menu" />
+          <EntitySet Name="Platos" EntityType="Self.Plato" />
+          <EntitySet Name="Postres" EntityType="Self.Postre" />
+          <EntitySet Name="Restaurantes" EntityType="Self.Restaurante" />
+          <EntitySet Name="Ubicaciones" EntityType="Self.Ubicacione" />
           <AssociationSet Name="FK_Platos_Bebidas" Association="Self.FK_Platos_Bebidas">
             <End Role="Bebidas" EntitySet="Bebidas" />
             <End Role="Platos" EntitySet="Platos" />
@@ -507,7 +485,7 @@
       <Mapping Space="C-S" xmlns="http://schemas.microsoft.com/ado/2009/11/mapping/cs">
         <EntityContainerMapping StorageEntityContainer="RestauranteModelStoreContainer" CdmEntityContainer="RestauranteEntities">
           <EntitySetMapping Name="Bebidas">
-            <EntityTypeMapping TypeName="RestauranteModel.Bebidas">
+            <EntityTypeMapping TypeName="RestauranteModel.Bebida">
               <MappingFragment StoreEntitySet="Bebidas">
                 <ScalarProperty Name="Id_Bebidas" ColumnName="Id_Bebidas" />
                 <ScalarProperty Name="Descripcion_Bebidas" ColumnName="Descripcion_Bebidas" />
@@ -515,7 +493,7 @@
             </EntityTypeMapping>
           </EntitySetMapping>
           <EntitySetMapping Name="Categorias">
-            <EntityTypeMapping TypeName="RestauranteModel.Categorias">
+            <EntityTypeMapping TypeName="RestauranteModel.Categoria">
               <MappingFragment StoreEntitySet="Categorias">
                 <ScalarProperty Name="Id_Categoria" ColumnName="Id_Categoria" />
                 <ScalarProperty Name="Descripcion_Categoria" ColumnName="Descripcion_Categoria" />
@@ -523,7 +501,7 @@
             </EntityTypeMapping>
           </EntitySetMapping>
           <EntitySetMapping Name="Ensaladas">
-            <EntityTypeMapping TypeName="RestauranteModel.Ensaladas">
+            <EntityTypeMapping TypeName="RestauranteModel.Ensalada">
               <MappingFragment StoreEntitySet="Ensaladas">
                 <ScalarProperty Name="Id_Ensaladas" ColumnName="Id_Ensaladas" />
                 <ScalarProperty Name="Descripcion_Ensaladas" ColumnName="Descripcion_Ensaladas" />
@@ -531,7 +509,7 @@
             </EntityTypeMapping>
           </EntitySetMapping>
           <EntitySetMapping Name="Menus">
-            <EntityTypeMapping TypeName="RestauranteModel.Menus">
+            <EntityTypeMapping TypeName="RestauranteModel.Menu">
               <MappingFragment StoreEntitySet="Menus">
                 <ScalarProperty Name="Id_Menu" ColumnName="Id_Menu" />
                 <ScalarProperty Name="Id_Categorias" ColumnName="Id_Categorias" />
@@ -540,7 +518,7 @@
             </EntityTypeMapping>
           </EntitySetMapping>
           <EntitySetMapping Name="Platos">
-            <EntityTypeMapping TypeName="RestauranteModel.Platos">
+            <EntityTypeMapping TypeName="RestauranteModel.Plato">
               <MappingFragment StoreEntitySet="Platos">
                 <ScalarProperty Name="Id_Plato" ColumnName="Id_Plato" />
                 <ScalarProperty Name="Id_Menu" ColumnName="Id_Menu" />
@@ -556,7 +534,7 @@
             </EntityTypeMapping>
           </EntitySetMapping>
           <EntitySetMapping Name="Postres">
-            <EntityTypeMapping TypeName="RestauranteModel.Postres">
+            <EntityTypeMapping TypeName="RestauranteModel.Postre">
               <MappingFragment StoreEntitySet="Postres">
                 <ScalarProperty Name="Id_Postres" ColumnName="Id_Postres" />
                 <ScalarProperty Name="Descripcion_Postres" ColumnName="Descripcion_Postres" />
@@ -564,7 +542,7 @@
             </EntityTypeMapping>
           </EntitySetMapping>
           <EntitySetMapping Name="Restaurantes">
-            <EntityTypeMapping TypeName="RestauranteModel.Restaurantes">
+            <EntityTypeMapping TypeName="RestauranteModel.Restaurante">
               <MappingFragment StoreEntitySet="Restaurantes">
                 <ScalarProperty Name="Id_Restaurante" ColumnName="Id_Restaurante" />
                 <ScalarProperty Name="Nombre" ColumnName="Nombre" />
@@ -573,19 +551,8 @@
               </MappingFragment>
             </EntityTypeMapping>
           </EntitySetMapping>
-          <EntitySetMapping Name="sysdiagrams">
-            <EntityTypeMapping TypeName="RestauranteModel.sysdiagrams">
-              <MappingFragment StoreEntitySet="sysdiagrams">
-                <ScalarProperty Name="name" ColumnName="name" />
-                <ScalarProperty Name="principal_id" ColumnName="principal_id" />
-                <ScalarProperty Name="diagram_id" ColumnName="diagram_id" />
-                <ScalarProperty Name="version" ColumnName="version" />
-                <ScalarProperty Name="definition" ColumnName="definition" />
-              </MappingFragment>
-            </EntityTypeMapping>
-          </EntitySetMapping>
           <EntitySetMapping Name="Ubicaciones">
-            <EntityTypeMapping TypeName="RestauranteModel.Ubicaciones">
+            <EntityTypeMapping TypeName="RestauranteModel.Ubicacione">
               <MappingFragment StoreEntitySet="Ubicaciones">
                 <ScalarProperty Name="Id_Ubicacion" ColumnName="Id_Ubicacion" />
                 <ScalarProperty Name="Descripcion" ColumnName="Descripcion" />
@@ -610,7 +577,7 @@
     <Options>
       <DesignerInfoPropertySet>
         <DesignerProperty Name="ValidateOnBuild" Value="true" />
-        <DesignerProperty Name="EnablePluralization" Value="false" />
+        <DesignerProperty Name="EnablePluralization" Value="true" />
         <DesignerProperty Name="IncludeForeignKeysInModel" Value="true" />
         <DesignerProperty Name="UseLegacyProvider" Value="false" />
         <DesignerProperty Name="CodeGenerationStrategy" Value="Ninguno" />

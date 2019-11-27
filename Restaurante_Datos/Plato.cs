@@ -12,12 +12,12 @@ namespace Restaurante_Datos
     using System;
     using System.Collections.Generic;
     
-    public partial class Platos
+    public partial class Plato
     {
         [System.Diagnostics.CodeAnalysis.SuppressMessage("Microsoft.Usage", "CA2214:DoNotCallOverridableMethodsInConstructors")]
-        public Platos()
+        public Plato()
         {
-            this.Menus = new HashSet<Menus>();
+            this.Menus = new HashSet<Menu>();
         }
     
         public int Id_Plato { get; set; }
@@ -31,11 +31,11 @@ namespace Restaurante_Datos
         public decimal Valor_Plato { get; set; }
         public string Imagen { get; set; }
     
-        public virtual Bebidas Bebidas { get; set; }
-        public virtual Ensaladas Ensaladas { get; set; }
+        public virtual Bebida Bebida { get; set; }
+        public virtual Ensalada Ensalada { get; set; }
         [System.Diagnostics.CodeAnalysis.SuppressMessage("Microsoft.Usage", "CA2227:CollectionPropertiesShouldBeReadOnly")]
-        public virtual ICollection<Menus> Menus { get; set; }
-        public virtual Menus Menus1 { get; set; }
-        public virtual Postres Postres { get; set; }
+        public virtual ICollection<Menu> Menus { get; set; }
+        public virtual Menu Menu { get; set; }
+        public virtual Postre Postre { get; set; }
     }
 }

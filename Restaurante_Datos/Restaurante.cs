@@ -12,18 +12,22 @@ namespace Restaurante_Datos
     using System;
     using System.Collections.Generic;
     
-    public partial class Ensaladas
+    public partial class Restaurante
     {
         [System.Diagnostics.CodeAnalysis.SuppressMessage("Microsoft.Usage", "CA2214:DoNotCallOverridableMethodsInConstructors")]
-        public Ensaladas()
+        public Restaurante()
         {
-            this.Platos = new HashSet<Platos>();
+            this.Ubicaciones = new HashSet<Ubicacione>();
         }
     
-        public int Id_Ensaladas { get; set; }
-        public string Descripcion_Ensaladas { get; set; }
+        public int Id_Restaurante { get; set; }
+        public string Nombre { get; set; }
+        public int Id_Categorias { get; set; }
+        public Nullable<int> Id_Menu { get; set; }
     
+        public virtual Categoria Categoria { get; set; }
+        public virtual Menu Menu { get; set; }
         [System.Diagnostics.CodeAnalysis.SuppressMessage("Microsoft.Usage", "CA2227:CollectionPropertiesShouldBeReadOnly")]
-        public virtual ICollection<Platos> Platos { get; set; }
+        public virtual ICollection<Ubicacione> Ubicaciones { get; set; }
     }
 }

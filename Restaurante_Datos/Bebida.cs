@@ -12,15 +12,18 @@ namespace Restaurante_Datos
     using System;
     using System.Collections.Generic;
     
-    public partial class Ubicaciones
+    public partial class Bebida
     {
-        public int Id_Ubicacion { get; set; }
-        public string Descripcion { get; set; }
-        public int Id_Restaurante { get; set; }
-        public int Telefono1 { get; set; }
-        public Nullable<int> Telefono2 { get; set; }
-        public string Correo { get; set; }
+        [System.Diagnostics.CodeAnalysis.SuppressMessage("Microsoft.Usage", "CA2214:DoNotCallOverridableMethodsInConstructors")]
+        public Bebida()
+        {
+            this.Platos = new HashSet<Plato>();
+        }
     
-        public virtual Restaurantes Restaurantes { get; set; }
+        public int Id_Bebidas { get; set; }
+        public string Descripcion_Bebidas { get; set; }
+    
+        [System.Diagnostics.CodeAnalysis.SuppressMessage("Microsoft.Usage", "CA2227:CollectionPropertiesShouldBeReadOnly")]
+        public virtual ICollection<Plato> Platos { get; set; }
     }
 }

@@ -12,24 +12,21 @@ namespace Restaurante_Datos
     using System;
     using System.Collections.Generic;
     
-    public partial class Menus
+    public partial class Categoria
     {
         [System.Diagnostics.CodeAnalysis.SuppressMessage("Microsoft.Usage", "CA2214:DoNotCallOverridableMethodsInConstructors")]
-        public Menus()
+        public Categoria()
         {
-            this.Platos1 = new HashSet<Platos>();
-            this.Restaurantes = new HashSet<Restaurantes>();
+            this.Menus = new HashSet<Menu>();
+            this.Restaurantes = new HashSet<Restaurante>();
         }
     
-        public int Id_Menu { get; set; }
-        public int Id_Categorias { get; set; }
-        public Nullable<int> Id_Plato { get; set; }
+        public int Id_Categoria { get; set; }
+        public string Descripcion_Categoria { get; set; }
     
-        public virtual Categorias Categorias { get; set; }
-        public virtual Platos Platos { get; set; }
         [System.Diagnostics.CodeAnalysis.SuppressMessage("Microsoft.Usage", "CA2227:CollectionPropertiesShouldBeReadOnly")]
-        public virtual ICollection<Platos> Platos1 { get; set; }
+        public virtual ICollection<Menu> Menus { get; set; }
         [System.Diagnostics.CodeAnalysis.SuppressMessage("Microsoft.Usage", "CA2227:CollectionPropertiesShouldBeReadOnly")]
-        public virtual ICollection<Restaurantes> Restaurantes { get; set; }
+        public virtual ICollection<Restaurante> Restaurantes { get; set; }
     }
 }

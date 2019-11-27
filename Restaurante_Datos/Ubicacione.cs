@@ -12,18 +12,15 @@ namespace Restaurante_Datos
     using System;
     using System.Collections.Generic;
     
-    public partial class Postres
+    public partial class Ubicacione
     {
-        [System.Diagnostics.CodeAnalysis.SuppressMessage("Microsoft.Usage", "CA2214:DoNotCallOverridableMethodsInConstructors")]
-        public Postres()
-        {
-            this.Platos = new HashSet<Platos>();
-        }
+        public int Id_Ubicacion { get; set; }
+        public string Descripcion { get; set; }
+        public int Id_Restaurante { get; set; }
+        public int Telefono1 { get; set; }
+        public Nullable<int> Telefono2 { get; set; }
+        public string Correo { get; set; }
     
-        public int Id_Postres { get; set; }
-        public string Descripcion_Postres { get; set; }
-    
-        [System.Diagnostics.CodeAnalysis.SuppressMessage("Microsoft.Usage", "CA2227:CollectionPropertiesShouldBeReadOnly")]
-        public virtual ICollection<Platos> Platos { get; set; }
+        public virtual Restaurante Restaurante { get; set; }
     }
 }

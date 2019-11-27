@@ -25,14 +25,13 @@ namespace Restaurante_Datos
             throw new UnintentionalCodeFirstException();
         }
     
-        public virtual DbSet<Bebidas> Bebidas { get; set; }
-        public virtual DbSet<Categorias> Categorias { get; set; }
-        public virtual DbSet<Ensaladas> Ensaladas { get; set; }
-        public virtual DbSet<Menus> Menus { get; set; }
-        public virtual DbSet<Platos> Platos { get; set; }
-        public virtual DbSet<Postres> Postres { get; set; }
-        public virtual DbSet<Restaurantes> Restaurantes { get; set; }
-        public virtual DbSet<sysdiagrams> sysdiagrams { get; set; }
-        public virtual DbSet<Ubicaciones> Ubicaciones { get; set; }
+        public virtual DbSet<Bebida> Bebidas { get; set; }
+        public virtual DbSet<Categoria> Categorias { get; set; }
+        public virtual DbSet<Ensalada> Ensaladas { get; set; }
+        public virtual DbSet<Menu> Menus { get; set; }
+        public virtual DbSet<Plato> Platos { get; set; }
+        public virtual DbSet<Postre> Postres { get; set; }
+        public virtual DbSet<Restaurante> Restaurantes { get; set; }
+        public virtual DbSet<Ubicacione> Ubicaciones { get; set; }
     }
 }
