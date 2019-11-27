@@ -1,0 +1,622 @@
+﻿<?xml version="1.0" encoding="utf-8"?>
+<edmx:Edmx Version="3.0" xmlns:edmx="http://schemas.microsoft.com/ado/2009/11/edmx">
+  <!-- EF Runtime content -->
+  <edmx:Runtime>
+    <!-- SSDL content -->
+    <edmx:StorageModels>
+      <Schema Namespace="RestauranteModel.Store" Provider="System.Data.SqlClient" ProviderManifestToken="2012" Alias="Self" xmlns:store="http://schemas.microsoft.com/ado/2007/12/edm/EntityStoreSchemaGenerator" xmlns:customannotation="http://schemas.microsoft.com/ado/2013/11/edm/customannotation" xmlns="http://schemas.microsoft.com/ado/2009/11/edm/ssdl">
+        <EntityType Name="Bebidas">
+          <Key>
+            <PropertyRef Name="Id_Bebidas" />
+          </Key>
+          <Property Name="Id_Bebidas" Type="int" Nullable="false" />
+          <Property Name="Descripcion_Bebidas" Type="nvarchar" MaxLength="50" Nullable="false" />
+        </EntityType>
+        <EntityType Name="Categorias">
+          <Key>
+            <PropertyRef Name="Id_Categoria" />
+          </Key>
+          <Property Name="Id_Categoria" Type="int" Nullable="false" />
+          <Property Name="Descripcion_Categoria" Type="nvarchar" MaxLength="50" Nullable="false" />
+        </EntityType>
+        <EntityType Name="Ensaladas">
+          <Key>
+            <PropertyRef Name="Id_Ensaladas" />
+          </Key>
+          <Property Name="Id_Ensaladas" Type="int" Nullable="false" />
+          <Property Name="Descripcion_Ensaladas" Type="nvarchar" MaxLength="50" Nullable="false" />
+        </EntityType>
+        <EntityType Name="Menus">
+          <Key>
+            <PropertyRef Name="Id_Menu" />
+          </Key>
+          <Property Name="Id_Menu" Type="int" Nullable="false" />
+          <Property Name="Id_Categorias" Type="int" Nullable="false" />
+          <Property Name="Id_Plato" Type="int" />
+        </EntityType>
+        <EntityType Name="Platos">
+          <Key>
+            <PropertyRef Name="Id_Plato" />
+          </Key>
+          <Property Name="Id_Plato" Type="int" Nullable="false" />
+          <Property Name="Id_Menu" Type="int" Nullable="false" />
+          <Property Name="Descripcion_Plato" Type="nvarchar" MaxLength="200" Nullable="false" />
+          <Property Name="Id_Postres" Type="int" />
+          <Property Name="Id_Ensaladas" Type="int" />
+          <Property Name="Id_Bebidas" Type="int" />
+          <Property Name="Combo_Plato" Type="bit" />
+          <Property Name="Promocion_Plato" Type="bit" />
+          <Property Name="Valor_Plato" Type="money" Nullable="false" />
+          <Property Name="Imagen" Type="nvarchar" MaxLength="300" />
+        </EntityType>
+        <EntityType Name="Postres">
+          <Key>
+            <PropertyRef Name="Id_Postres" />
+          </Key>
+          <Property Name="Id_Postres" Type="int" Nullable="false" />
+          <Property Name="Descripcion_Postres" Type="nvarchar" MaxLength="50" Nullable="false" />
+        </EntityType>
+        <EntityType Name="Restaurantes">
+          <Key>
+            <PropertyRef Name="Id_Restaurante" />
+          </Key>
+          <Property Name="Id_Restaurante" Type="int" Nullable="false" />
+          <Property Name="Nombre" Type="nvarchar" MaxLength="200" Nullable="false" />
+          <Property Name="Id_Categorias" Type="int" Nullable="false" />
+          <Property Name="Id_Menu" Type="int" />
+        </EntityType>
+        <EntityType Name="sysdiagrams">
+          <Key>
+            <PropertyRef Name="diagram_id" />
+          </Key>
+          <Property Name="name" Type="nvarchar" MaxLength="128" Nullable="false" />
+          <Property Name="principal_id" Type="int" Nullable="false" />
+          <Property Name="diagram_id" Type="int" StoreGeneratedPattern="Identity" Nullable="false" />
+          <Property Name="version" Type="int" />
+          <Property Name="definition" Type="varbinary(max)" />
+        </EntityType>
+        <EntityType Name="Ubicaciones">
+          <Key>
+            <PropertyRef Name="Id_Ubicacion" />
+          </Key>
+          <Property Name="Id_Ubicacion" Type="int" Nullable="false" />
+          <Property Name="Descripcion" Type="nvarchar" MaxLength="250" Nullable="false" />
+          <Property Name="Id_Restaurante" Type="int" Nullable="false" />
+          <Property Name="Telefono1" Type="int" Nullable="false" />
+          <Property Name="Telefono2" Type="int" />
+          <Property Name="Correo" Type="nvarchar" MaxLength="50" />
+        </EntityType>
+        <Association Name="FK_Menus_Categorias">
+          <End Role="Categorias" Type="Self.Categorias" Multiplicity="1" />
+          <End Role="Menus" Type="Self.Menus" Multiplicity="*" />
+          <ReferentialConstraint>
+            <Principal Role="Categorias">
+              <PropertyRef Name="Id_Categoria" />
+            </Principal>
+            <Dependent Role="Menus">
+              <PropertyRef Name="Id_Categorias" />
+            </Dependent>
+          </ReferentialConstraint>
+        </Association>
+        <Association Name="FK_Menus_Platos">
+          <End Role="Platos" Type="Self.Platos" Multiplicity="0..1" />
+          <End Role="Menus" Type="Self.Menus" Multiplicity="*" />
+          <ReferentialConstraint>
+            <Principal Role="Platos">
+              <PropertyRef Name="Id_Plato" />
+            </Principal>
+            <Dependent Role="Menus">
+              <PropertyRef Name="Id_Plato" />
+            </Dependent>
+          </ReferentialConstraint>
+        </Association>
+        <Association Name="FK_Platos_Bebidas">
+          <End Role="Bebidas" Type="Self.Bebidas" Multiplicity="0..1" />
+          <End Role="Platos" Type="Self.Platos" Multiplicity="*" />
+          <ReferentialConstraint>
+            <Principal Role="Bebidas">
+              <PropertyRef Name="Id_Bebidas" />
+            </Principal>
+            <Dependent Role="Platos">
+              <PropertyRef Name="Id_Bebidas" />
+            </Dependent>
+          </ReferentialConstraint>
+        </Association>
+        <Association Name="FK_Platos_Ensaladas">
+          <End Role="Ensaladas" Type="Self.Ensaladas" Multiplicity="0..1" />
+          <End Role="Platos" Type="Self.Platos" Multiplicity="*" />
+          <ReferentialConstraint>
+            <Principal Role="Ensaladas">
+              <PropertyRef Name="Id_Ensaladas" />
+            </Principal>
+            <Dependent Role="Platos">
+              <PropertyRef Name="Id_Ensaladas" />
+            </Dependent>
+          </ReferentialConstraint>
+        </Association>
+        <Association Name="FK_Platos_Menus">
+          <End Role="Menus" Type="Self.Menus" Multiplicity="1" />
+          <End Role="Platos" Type="Self.Platos" Multiplicity="*" />
+          <ReferentialConstraint>
+            <Principal Role="Menus">
+              <PropertyRef Name="Id_Menu" />
+            </Principal>
+            <Dependent Role="Platos">
+              <PropertyRef Name="Id_Menu" />
+            </Dependent>
+          </ReferentialConstraint>
+        </Association>
+        <Association Name="FK_Platos_Postres">
+          <End Role="Postres" Type="Self.Postres" Multiplicity="0..1" />
+          <End Role="Platos" Type="Self.Platos" Multiplicity="*" />
+          <ReferentialConstraint>
+            <Principal Role="Postres">
+              <PropertyRef Name="Id_Postres" />
+            </Principal>
+            <Dependent Role="Platos">
+              <PropertyRef Name="Id_Postres" />
+            </Dependent>
+          </ReferentialConstraint>
+        </Association>
+        <Association Name="FK_Restaurantes_Categorias">
+          <End Role="Categorias" Type="Self.Categorias" Multiplicity="1" />
+          <End Role="Restaurantes" Type="Self.Restaurantes" Multiplicity="*" />
+          <ReferentialConstraint>
+            <Principal Role="Categorias">
+              <PropertyRef Name="Id_Categoria" />
+            </Principal>
+            <Dependent Role="Restaurantes">
+              <PropertyRef Name="Id_Categorias" />
+            </Dependent>
+          </ReferentialConstraint>
+        </Association>
+        <Association Name="FK_Restaurantes_Menus">
+          <End Role="Menus" Type="Self.Menus" Multiplicity="0..1" />
+          <End Role="Restaurantes" Type="Self.Restaurantes" Multiplicity="*" />
+          <ReferentialConstraint>
+            <Principal Role="Menus">
+              <PropertyRef Name="Id_Menu" />
+            </Principal>
+            <Dependent Role="Restaurantes">
+              <PropertyRef Name="Id_Menu" />
+            </Dependent>
+          </ReferentialConstraint>
+        </Association>
+        <Association Name="FK_Ubicaciones_Restaurantes">
+          <End Role="Restaurantes" Type="Self.Restaurantes" Multiplicity="1" />
+          <End Role="Ubicaciones" Type="Self.Ubicaciones" Multiplicity="*" />
+          <ReferentialConstraint>
+            <Principal Role="Restaurantes">
+              <PropertyRef Name="Id_Restaurante" />
+            </Principal>
+            <Dependent Role="Ubicaciones">
+              <PropertyRef Name="Id_Restaurante" />
+            </Dependent>
+          </ReferentialConstraint>
+        </Association>
+        <EntityContainer Name="RestauranteModelStoreContainer">
+          <EntitySet Name="Bebidas" EntityType="Self.Bebidas" Schema="dbo" store:Type="Tables" />
+          <EntitySet Name="Categorias" EntityType="Self.Categorias" Schema="dbo" store:Type="Tables" />
+          <EntitySet Name="Ensaladas" EntityType="Self.Ensaladas" Schema="dbo" store:Type="Tables" />
+          <EntitySet Name="Menus" EntityType="Self.Menus" Schema="dbo" store:Type="Tables" />
+          <EntitySet Name="Platos" EntityType="Self.Platos" Schema="dbo" store:Type="Tables" />
+          <EntitySet Name="Postres" EntityType="Self.Postres" Schema="dbo" store:Type="Tables" />
+          <EntitySet Name="Restaurantes" EntityType="Self.Restaurantes" Schema="dbo" store:Type="Tables" />
+          <EntitySet Name="sysdiagrams" EntityType="Self.sysdiagrams" Schema="dbo" store:Type="Tables" />
+          <EntitySet Name="Ubicaciones" EntityType="Self.Ubicaciones" Schema="dbo" store:Type="Tables" />
+          <AssociationSet Name="FK_Menus_Categorias" Association="Self.FK_Menus_Categorias">
+            <End Role="Categorias" EntitySet="Categorias" />
+            <End Role="Menus" EntitySet="Menus" />
+          </AssociationSet>
+          <AssociationSet Name="FK_Menus_Platos" Association="Self.FK_Menus_Platos">
+            <End Role="Platos" EntitySet="Platos" />
+            <End Role="Menus" EntitySet="Menus" />
+          </AssociationSet>
+          <AssociationSet Name="FK_Platos_Bebidas" Association="Self.FK_Platos_Bebidas">
+            <End Role="Bebidas" EntitySet="Bebidas" />
+            <End Role="Platos" EntitySet="Platos" />
+          </AssociationSet>
+          <AssociationSet Name="FK_Platos_Ensaladas" Association="Self.FK_Platos_Ensaladas">
+            <End Role="Ensaladas" EntitySet="Ensaladas" />
+            <End Role="Platos" EntitySet="Platos" />
+          </AssociationSet>
+          <AssociationSet Name="FK_Platos_Menus" Association="Self.FK_Platos_Menus">
+            <End Role="Menus" EntitySet="Menus" />
+            <End Role="Platos" EntitySet="Platos" />
+          </AssociationSet>
+          <AssociationSet Name="FK_Platos_Postres" Association="Self.FK_Platos_Postres">
+            <End Role="Postres" EntitySet="Postres" />
+            <End Role="Platos" EntitySet="Platos" />
+          </AssociationSet>
+          <AssociationSet Name="FK_Restaurantes_Categorias" Association="Self.FK_Restaurantes_Categorias">
+            <End Role="Categorias" EntitySet="Categorias" />
+            <End Role="Restaurantes" EntitySet="Restaurantes" />
+          </AssociationSet>
+          <AssociationSet Name="FK_Restaurantes_Menus" Association="Self.FK_Restaurantes_Menus">
+            <End Role="Menus" EntitySet="Menus" />
+            <End Role="Restaurantes" EntitySet="Restaurantes" />
+          </AssociationSet>
+          <AssociationSet Name="FK_Ubicaciones_Restaurantes" Association="Self.FK_Ubicaciones_Restaurantes">
+            <End Role="Restaurantes" EntitySet="Restaurantes" />
+            <End Role="Ubicaciones" EntitySet="Ubicaciones" />
+          </AssociationSet>
+        </EntityContainer>
+      </Schema>
+    </edmx:StorageModels>
+    <!-- CSDL content -->
+    <edmx:ConceptualModels>
+      <Schema Namespace="RestauranteModel" Alias="Self" annotation:UseStrongSpatialTypes="false" xmlns:annotation="http://schemas.microsoft.com/ado/2009/02/edm/annotation" xmlns:customannotation="http://schemas.microsoft.com/ado/2013/11/edm/customannotation" xmlns="http://schemas.microsoft.com/ado/2009/11/edm">
+        <EntityType Name="Bebidas">
+          <Key>
+            <PropertyRef Name="Id_Bebidas" />
+          </Key>
+          <Property Name="Id_Bebidas" Type="Int32" Nullable="false" />
+          <Property Name="Descripcion_Bebidas" Type="String" MaxLength="50" FixedLength="false" Unicode="true" Nullable="false" />
+          <NavigationProperty Name="Platos" Relationship="Self.FK_Platos_Bebidas" FromRole="Bebidas" ToRole="Platos" />
+        </EntityType>
+        <EntityType Name="Categorias">
+          <Key>
+            <PropertyRef Name="Id_Categoria" />
+          </Key>
+          <Property Name="Id_Categoria" Type="Int32" Nullable="false" />
+          <Property Name="Descripcion_Categoria" Type="String" MaxLength="50" FixedLength="false" Unicode="true" Nullable="false" />
+          <NavigationProperty Name="Menus" Relationship="Self.FK_Menus_Categorias" FromRole="Categorias" ToRole="Menus" />
+          <NavigationProperty Name="Restaurantes" Relationship="Self.FK_Restaurantes_Categorias" FromRole="Categorias" ToRole="Restaurantes" />
+        </EntityType>
+        <EntityType Name="Ensaladas">
+          <Key>
+            <PropertyRef Name="Id_Ensaladas" />
+          </Key>
+          <Property Name="Id_Ensaladas" Type="Int32" Nullable="false" />
+          <Property Name="Descripcion_Ensaladas" Type="String" MaxLength="50" FixedLength="false" Unicode="true" Nullable="false" />
+          <NavigationProperty Name="Platos" Relationship="Self.FK_Platos_Ensaladas" FromRole="Ensaladas" ToRole="Platos" />
+        </EntityType>
+        <EntityType Name="Menus">
+          <Key>
+            <PropertyRef Name="Id_Menu" />
+          </Key>
+          <Property Name="Id_Menu" Type="Int32" Nullable="false" />
+          <Property Name="Id_Categorias" Type="Int32" Nullable="false" />
+          <Property Name="Id_Plato" Type="Int32" />
+          <NavigationProperty Name="Categorias" Relationship="Self.FK_Menus_Categorias" FromRole="Menus" ToRole="Categorias" />
+          <NavigationProperty Name="Platos" Relationship="Self.FK_Menus_Platos" FromRole="Menus" ToRole="Platos" />
+          <NavigationProperty Name="Platos1" Relationship="Self.FK_Platos_Menus" FromRole="Menus" ToRole="Platos" />
+          <NavigationProperty Name="Restaurantes" Relationship="Self.FK_Restaurantes_Menus" FromRole="Menus" ToRole="Restaurantes" />
+        </EntityType>
+        <EntityType Name="Platos">
+          <Key>
+            <PropertyRef Name="Id_Plato" />
+          </Key>
+          <Property Name="Id_Plato" Type="Int32" Nullable="false" />
+          <Property Name="Id_Menu" Type="Int32" Nullable="false" />
+          <Property Name="Descripcion_Plato" Type="String" MaxLength="200" FixedLength="false" Unicode="true" Nullable="false" />
+          <Property Name="Id_Postres" Type="Int32" />
+          <Property Name="Id_Ensaladas" Type="Int32" />
+          <Property Name="Id_Bebidas" Type="Int32" />
+          <Property Name="Combo_Plato" Type="Boolean" />
+          <Property Name="Promocion_Plato" Type="Boolean" />
+          <Property Name="Valor_Plato" Type="Decimal" Precision="19" Scale="4" Nullable="false" />
+          <Property Name="Imagen" Type="String" MaxLength="300" FixedLength="false" Unicode="true" />
+          <NavigationProperty Name="Bebidas" Relationship="Self.FK_Platos_Bebidas" FromRole="Platos" ToRole="Bebidas" />
+          <NavigationProperty Name="Ensaladas" Relationship="Self.FK_Platos_Ensaladas" FromRole="Platos" ToRole="Ensaladas" />
+          <NavigationProperty Name="Menus" Relationship="Self.FK_Menus_Platos" FromRole="Platos" ToRole="Menus" />
+          <NavigationProperty Name="Menus1" Relationship="Self.FK_Platos_Menus" FromRole="Platos" ToRole="Menus" />
+          <NavigationProperty Name="Postres" Relationship="Self.FK_Platos_Postres" FromRole="Platos" ToRole="Postres" />
+        </EntityType>
+        <EntityType Name="Postres">
+          <Key>
+            <PropertyRef Name="Id_Postres" />
+          </Key>
+          <Property Name="Id_Postres" Type="Int32" Nullable="false" />
+          <Property Name="Descripcion_Postres" Type="String" MaxLength="50" FixedLength="false" Unicode="true" Nullable="false" />
+          <NavigationProperty Name="Platos" Relationship="Self.FK_Platos_Postres" FromRole="Postres" ToRole="Platos" />
+        </EntityType>
+        <EntityType Name="Restaurantes">
+          <Key>
+            <PropertyRef Name="Id_Restaurante" />
+          </Key>
+          <Property Name="Id_Restaurante" Type="Int32" Nullable="false" />
+          <Property Name="Nombre" Type="String" MaxLength="200" FixedLength="false" Unicode="true" Nullable="false" />
+          <Property Name="Id_Categorias" Type="Int32" Nullable="false" />
+          <Property Name="Id_Menu" Type="Int32" />
+          <NavigationProperty Name="Categorias" Relationship="Self.FK_Restaurantes_Categorias" FromRole="Restaurantes" ToRole="Categorias" />
+          <NavigationProperty Name="Menus" Relationship="Self.FK_Restaurantes_Menus" FromRole="Restaurantes" ToRole="Menus" />
+          <NavigationProperty Name="Ubicaciones" Relationship="Self.FK_Ubicaciones_Restaurantes" FromRole="Restaurantes" ToRole="Ubicaciones" />
+        </EntityType>
+        <EntityType Name="sysdiagrams">
+          <Key>
+            <PropertyRef Name="diagram_id" />
+          </Key>
+          <Property Name="name" Type="String" MaxLength="128" FixedLength="false" Unicode="true" Nullable="false" />
+          <Property Name="principal_id" Type="Int32" Nullable="false" />
+          <Property Name="diagram_id" Type="Int32" Nullable="false" annotation:StoreGeneratedPattern="Identity" />
+          <Property Name="version" Type="Int32" />
+          <Property Name="definition" Type="Binary" MaxLength="Max" FixedLength="false" />
+        </EntityType>
+        <EntityType Name="Ubicaciones">
+          <Key>
+            <PropertyRef Name="Id_Ubicacion" />
+          </Key>
+          <Property Name="Id_Ubicacion" Type="Int32" Nullable="false" />
+          <Property Name="Descripcion" Type="String" MaxLength="250" FixedLength="false" Unicode="true" Nullable="false" />
+          <Property Name="Id_Restaurante" Type="Int32" Nullable="false" />
+          <Property Name="Telefono1" Type="Int32" Nullable="false" />
+          <Property Name="Telefono2" Type="Int32" />
+          <Property Name="Correo" Type="String" MaxLength="50" FixedLength="false" Unicode="true" />
+          <NavigationProperty Name="Restaurantes" Relationship="Self.FK_Ubicaciones_Restaurantes" FromRole="Ubicaciones" ToRole="Restaurantes" />
+        </EntityType>
+        <Association Name="FK_Platos_Bebidas">
+          <End Role="Bebidas" Type="Self.Bebidas" Multiplicity="0..1" />
+          <End Role="Platos" Type="Self.Platos" Multiplicity="*" />
+          <ReferentialConstraint>
+            <Principal Role="Bebidas">
+              <PropertyRef Name="Id_Bebidas" />
+            </Principal>
+            <Dependent Role="Platos">
+              <PropertyRef Name="Id_Bebidas" />
+            </Dependent>
+          </ReferentialConstraint>
+        </Association>
+        <Association Name="FK_Menus_Categorias">
+          <End Role="Categorias" Type="Self.Categorias" Multiplicity="1" />
+          <End Role="Menus" Type="Self.Menus" Multiplicity="*" />
+          <ReferentialConstraint>
+            <Principal Role="Categorias">
+              <PropertyRef Name="Id_Categoria" />
+            </Principal>
+            <Dependent Role="Menus">
+              <PropertyRef Name="Id_Categorias" />
+            </Dependent>
+          </ReferentialConstraint>
+        </Association>
+        <Association Name="FK_Restaurantes_Categorias">
+          <End Role="Categorias" Type="Self.Categorias" Multiplicity="1" />
+          <End Role="Restaurantes" Type="Self.Restaurantes" Multiplicity="*" />
+          <ReferentialConstraint>
+            <Principal Role="Categorias">
+              <PropertyRef Name="Id_Categoria" />
+            </Principal>
+            <Dependent Role="Restaurantes">
+              <PropertyRef Name="Id_Categorias" />
+            </Dependent>
+          </ReferentialConstraint>
+        </Association>
+        <Association Name="FK_Platos_Ensaladas">
+          <End Role="Ensaladas" Type="Self.Ensaladas" Multiplicity="0..1" />
+          <End Role="Platos" Type="Self.Platos" Multiplicity="*" />
+          <ReferentialConstraint>
+            <Principal Role="Ensaladas">
+              <PropertyRef Name="Id_Ensaladas" />
+            </Principal>
+            <Dependent Role="Platos">
+              <PropertyRef Name="Id_Ensaladas" />
+            </Dependent>
+          </ReferentialConstraint>
+        </Association>
+        <Association Name="FK_Menus_Platos">
+          <End Role="Platos" Type="Self.Platos" Multiplicity="0..1" />
+          <End Role="Menus" Type="Self.Menus" Multiplicity="*" />
+          <ReferentialConstraint>
+            <Principal Role="Platos">
+              <PropertyRef Name="Id_Plato" />
+            </Principal>
+            <Dependent Role="Menus">
+              <PropertyRef Name="Id_Plato" />
+            </Dependent>
+          </ReferentialConstraint>
+        </Association>
+        <Association Name="FK_Platos_Menus">
+          <End Role="Menus" Type="Self.Menus" Multiplicity="1" />
+          <End Role="Platos" Type="Self.Platos" Multiplicity="*" />
+          <ReferentialConstraint>
+            <Principal Role="Menus">
+              <PropertyRef Name="Id_Menu" />
+            </Principal>
+            <Dependent Role="Platos">
+              <PropertyRef Name="Id_Menu" />
+            </Dependent>
+          </ReferentialConstraint>
+        </Association>
+        <Association Name="FK_Restaurantes_Menus">
+          <End Role="Menus" Type="Self.Menus" Multiplicity="0..1" />
+          <End Role="Restaurantes" Type="Self.Restaurantes" Multiplicity="*" />
+          <ReferentialConstraint>
+            <Principal Role="Menus">
+              <PropertyRef Name="Id_Menu" />
+            </Principal>
+            <Dependent Role="Restaurantes">
+              <PropertyRef Name="Id_Menu" />
+            </Dependent>
+          </ReferentialConstraint>
+        </Association>
+        <Association Name="FK_Platos_Postres">
+          <End Role="Postres" Type="Self.Postres" Multiplicity="0..1" />
+          <End Role="Platos" Type="Self.Platos" Multiplicity="*" />
+          <ReferentialConstraint>
+            <Principal Role="Postres">
+              <PropertyRef Name="Id_Postres" />
+            </Principal>
+            <Dependent Role="Platos">
+              <PropertyRef Name="Id_Postres" />
+            </Dependent>
+          </ReferentialConstraint>
+        </Association>
+        <Association Name="FK_Ubicaciones_Restaurantes">
+          <End Role="Restaurantes" Type="Self.Restaurantes" Multiplicity="1" />
+          <End Role="Ubicaciones" Type="Self.Ubicaciones" Multiplicity="*" />
+          <ReferentialConstraint>
+            <Principal Role="Restaurantes">
+              <PropertyRef Name="Id_Restaurante" />
+            </Principal>
+            <Dependent Role="Ubicaciones">
+              <PropertyRef Name="Id_Restaurante" />
+            </Dependent>
+          </ReferentialConstraint>
+        </Association>
+        <EntityContainer Name="RestauranteEntities" annotation:LazyLoadingEnabled="true">
+          <EntitySet Name="Bebidas" EntityType="Self.Bebidas" />
+          <EntitySet Name="Categorias" EntityType="Self.Categorias" />
+          <EntitySet Name="Ensaladas" EntityType="Self.Ensaladas" />
+          <EntitySet Name="Menus" EntityType="Self.Menus" />
+          <EntitySet Name="Platos" EntityType="Self.Platos" />
+          <EntitySet Name="Postres" EntityType="Self.Postres" />
+          <EntitySet Name="Restaurantes" EntityType="Self.Restaurantes" />
+          <EntitySet Name="sysdiagrams" EntityType="Self.sysdiagrams" />
+          <EntitySet Name="Ubicaciones" EntityType="Self.Ubicaciones" />
+          <AssociationSet Name="FK_Platos_Bebidas" Association="Self.FK_Platos_Bebidas">
+            <End Role="Bebidas" EntitySet="Bebidas" />
+            <End Role="Platos" EntitySet="Platos" />
+          </AssociationSet>
+          <AssociationSet Name="FK_Menus_Categorias" Association="Self.FK_Menus_Categorias">
+            <End Role="Categorias" EntitySet="Categorias" />
+            <End Role="Menus" EntitySet="Menus" />
+          </AssociationSet>
+          <AssociationSet Name="FK_Restaurantes_Categorias" Association="Self.FK_Restaurantes_Categorias">
+            <End Role="Categorias" EntitySet="Categorias" />
+            <End Role="Restaurantes" EntitySet="Restaurantes" />
+          </AssociationSet>
+          <AssociationSet Name="FK_Platos_Ensaladas" Association="Self.FK_Platos_Ensaladas">
+            <End Role="Ensaladas" EntitySet="Ensaladas" />
+            <End Role="Platos" EntitySet="Platos" />
+          </AssociationSet>
+          <AssociationSet Name="FK_Menus_Platos" Association="Self.FK_Menus_Platos">
+            <End Role="Platos" EntitySet="Platos" />
+            <End Role="Menus" EntitySet="Menus" />
+          </AssociationSet>
+          <AssociationSet Name="FK_Platos_Menus" Association="Self.FK_Platos_Menus">
+            <End Role="Menus" EntitySet="Menus" />
+            <End Role="Platos" EntitySet="Platos" />
+          </AssociationSet>
+          <AssociationSet Name="FK_Restaurantes_Menus" Association="Self.FK_Restaurantes_Menus">
+            <End Role="Menus" EntitySet="Menus" />
+            <End Role="Restaurantes" EntitySet="Restaurantes" />
+          </AssociationSet>
+          <AssociationSet Name="FK_Platos_Postres" Association="Self.FK_Platos_Postres">
+            <End Role="Postres" EntitySet="Postres" />
+            <End Role="Platos" EntitySet="Platos" />
+          </AssociationSet>
+          <AssociationSet Name="FK_Ubicaciones_Restaurantes" Association="Self.FK_Ubicaciones_Restaurantes">
+            <End Role="Restaurantes" EntitySet="Restaurantes" />
+            <End Role="Ubicaciones" EntitySet="Ubicaciones" />
+          </AssociationSet>
+        </EntityContainer>
+      </Schema>
+    </edmx:ConceptualModels>
+    <!-- C-S mapping content -->
+    <edmx:Mappings>
+      <Mapping Space="C-S" xmlns="http://schemas.microsoft.com/ado/2009/11/mapping/cs">
+        <EntityContainerMapping StorageEntityContainer="RestauranteModelStoreContainer" CdmEntityContainer="RestauranteEntities">
+          <EntitySetMapping Name="Bebidas">
+            <EntityTypeMapping TypeName="RestauranteModel.Bebidas">
+              <MappingFragment StoreEntitySet="Bebidas">
+                <ScalarProperty Name="Id_Bebidas" ColumnName="Id_Bebidas" />
+                <ScalarProperty Name="Descripcion_Bebidas" ColumnName="Descripcion_Bebidas" />
+              </MappingFragment>
+            </EntityTypeMapping>
+          </EntitySetMapping>
+          <EntitySetMapping Name="Categorias">
+            <EntityTypeMapping TypeName="RestauranteModel.Categorias">
+              <MappingFragment StoreEntitySet="Categorias">
+                <ScalarProperty Name="Id_Categoria" ColumnName="Id_Categoria" />
+                <ScalarProperty Name="Descripcion_Categoria" ColumnName="Descripcion_Categoria" />
+              </MappingFragment>
+            </EntityTypeMapping>
+          </EntitySetMapping>
+          <EntitySetMapping Name="Ensaladas">
+            <EntityTypeMapping TypeName="RestauranteModel.Ensaladas">
+              <MappingFragment StoreEntitySet="Ensaladas">
+                <ScalarProperty Name="Id_Ensaladas" ColumnName="Id_Ensaladas" />
+                <ScalarProperty Name="Descripcion_Ensaladas" ColumnName="Descripcion_Ensaladas" />
+              </MappingFragment>
+            </EntityTypeMapping>
+          </EntitySetMapping>
+          <EntitySetMapping Name="Menus">
+            <EntityTypeMapping TypeName="RestauranteModel.Menus">
+              <MappingFragment StoreEntitySet="Menus">
+                <ScalarProperty Name="Id_Menu" ColumnName="Id_Menu" />
+                <ScalarProperty Name="Id_Categorias" ColumnName="Id_Categorias" />
+                <ScalarProperty Name="Id_Plato" ColumnName="Id_Plato" />
+              </MappingFragment>
+            </EntityTypeMapping>
+          </EntitySetMapping>
+          <EntitySetMapping Name="Platos">
+            <EntityTypeMapping TypeName="RestauranteModel.Platos">
+              <MappingFragment StoreEntitySet="Platos">
+                <ScalarProperty Name="Id_Plato" ColumnName="Id_Plato" />
+                <ScalarProperty Name="Id_Menu" ColumnName="Id_Menu" />
+                <ScalarProperty Name="Descripcion_Plato" ColumnName="Descripcion_Plato" />
+                <ScalarProperty Name="Id_Postres" ColumnName="Id_Postres" />
+                <ScalarProperty Name="Id_Ensaladas" ColumnName="Id_Ensaladas" />
+                <ScalarProperty Name="Id_Bebidas" ColumnName="Id_Bebidas" />
+                <ScalarProperty Name="Combo_Plato" ColumnName="Combo_Plato" />
+                <ScalarProperty Name="Promocion_Plato" ColumnName="Promocion_Plato" />
+                <ScalarProperty Name="Valor_Plato" ColumnName="Valor_Plato" />
+                <ScalarProperty Name="Imagen" ColumnName="Imagen" />
+              </MappingFragment>
+            </EntityTypeMapping>
+          </EntitySetMapping>
+          <EntitySetMapping Name="Postres">
+            <EntityTypeMapping TypeName="RestauranteModel.Postres">
+              <MappingFragment StoreEntitySet="Postres">
+                <ScalarProperty Name="Id_Postres" ColumnName="Id_Postres" />
+                <ScalarProperty Name="Descripcion_Postres" ColumnName="Descripcion_Postres" />
+              </MappingFragment>
+            </EntityTypeMapping>
+          </EntitySetMapping>
+          <EntitySetMapping Name="Restaurantes">
+            <EntityTypeMapping TypeName="RestauranteModel.Restaurantes">
+              <MappingFragment StoreEntitySet="Restaurantes">
+                <ScalarProperty Name="Id_Restaurante" ColumnName="Id_Restaurante" />
+                <ScalarProperty Name="Nombre" ColumnName="Nombre" />
+                <ScalarProperty Name="Id_Categorias" ColumnName="Id_Categorias" />
+                <ScalarProperty Name="Id_Menu" ColumnName="Id_Menu" />
+              </MappingFragment>
+            </EntityTypeMapping>
+          </EntitySetMapping>
+          <EntitySetMapping Name="sysdiagrams">
+            <EntityTypeMapping TypeName="RestauranteModel.sysdiagrams">
+              <MappingFragment StoreEntitySet="sysdiagrams">
+                <ScalarProperty Name="name" ColumnName="name" />
+                <ScalarProperty Name="principal_id" ColumnName="principal_id" />
+                <ScalarProperty Name="diagram_id" ColumnName="diagram_id" />
+                <ScalarProperty Name="version" ColumnName="version" />
+                <ScalarProperty Name="definition" ColumnName="definition" />
+              </MappingFragment>
+            </EntityTypeMapping>
+          </EntitySetMapping>
+          <EntitySetMapping Name="Ubicaciones">
+            <EntityTypeMapping TypeName="RestauranteModel.Ubicaciones">
+              <MappingFragment StoreEntitySet="Ubicaciones">
+                <ScalarProperty Name="Id_Ubicacion" ColumnName="Id_Ubicacion" />
+                <ScalarProperty Name="Descripcion" ColumnName="Descripcion" />
+                <ScalarProperty Name="Id_Restaurante" ColumnName="Id_Restaurante" />
+                <ScalarProperty Name="Telefono1" ColumnName="Telefono1" />
+                <ScalarProperty Name="Telefono2" ColumnName="Telefono2" />
+                <ScalarProperty Name="Correo" ColumnName="Correo" />
+              </MappingFragment>
+            </EntityTypeMapping>
+          </EntitySetMapping>
+        </EntityContainerMapping>
+      </Mapping>
+    </edmx:Mappings>
+  </edmx:Runtime>
+  <!-- EF Designer content (DO NOT EDIT MANUALLY BELOW HERE) -->
+  <Designer xmlns="http://schemas.microsoft.com/ado/2009/11/edmx">
+    <Connection>
+      <DesignerInfoPropertySet>
+        <DesignerProperty Name="MetadataArtifactProcessing" Value="EmbedInOutputAssembly" />
+      </DesignerInfoPropertySet>
+    </Connection>
+    <Options>
+      <DesignerInfoPropertySet>
+        <DesignerProperty Name="ValidateOnBuild" Value="true" />
+        <DesignerProperty Name="EnablePluralization" Value="false" />
+        <DesignerProperty Name="IncludeForeignKeysInModel" Value="true" />
+        <DesignerProperty Name="UseLegacyProvider" Value="false" />
+        <DesignerProperty Name="CodeGenerationStrategy" Value="Ninguno" />
+      </DesignerInfoPropertySet>
+    </Options>
+    <!-- Diagram content (shape and connector positions) -->
+    <Diagrams></Diagrams>
+  </Designer>
+</edmx:Edmx>
