@@ -35,6 +35,7 @@ namespace Restaurante_Datos
         public virtual DbSet<Postre> Postres { get; set; }
         public virtual DbSet<Restaurante> Restaurantes { get; set; }
         public virtual DbSet<Ubicacione> Ubicaciones { get; set; }
+        public virtual DbSet<Usuario> Usuarios { get; set; }
     
         public virtual int InsertarBebida(Nullable<int> id_Bebidas, string descripcion_Bebidas)
         {

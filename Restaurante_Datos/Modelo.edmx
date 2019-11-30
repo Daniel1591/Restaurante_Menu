@@ -76,6 +76,19 @@
           <Property Name="Telefono2" Type="int" />
           <Property Name="Correo" Type="nvarchar" MaxLength="50" />
         </EntityType>
+        <!--Errores durante la generación:
+advertencia 6002: La tabla o vista 'Restaurante.dbo.Usuarios' no tiene definida ninguna clave principal. Se ha inferido la clave y la definición se creado como una vista o tabla de solo lectura.-->
+        <EntityType Name="Usuarios">
+          <Key>
+            <PropertyRef Name="Id_Usuario" />
+            <PropertyRef Name="Nombre" />
+            <PropertyRef Name="Correo" />
+          </Key>
+          <Property Name="Id_Usuario" Type="int" Nullable="false" />
+          <Property Name="Nombre" Type="nvarchar" MaxLength="250" Nullable="false" />
+          <Property Name="Correo" Type="int" Nullable="false" />
+          <Property Name="Contrasena" Type="nvarchar" MaxLength="50" />
+        </EntityType>
         <Association Name="FK_Menus_Categorias">
           <End Role="Categorias" Type="Self.Categorias" Multiplicity="1" />
           <End Role="Menus" Type="Self.Menus" Multiplicity="*" />
@@ -240,6 +253,14 @@
           <EntitySet Name="Postres" EntityType="Self.Postres" Schema="dbo" store:Type="Tables" />
           <EntitySet Name="Restaurantes" EntityType="Self.Restaurantes" Schema="dbo" store:Type="Tables" />
           <EntitySet Name="Ubicaciones" EntityType="Self.Ubicaciones" Schema="dbo" store:Type="Tables" />
+          <EntitySet Name="Usuarios" EntityType="Self.Usuarios" store:Type="Tables" store:Schema="dbo">
+            <DefiningQuery>SELECT 
+    [Usuarios].[Id_Usuario] AS [Id_Usuario], 
+    [Usuarios].[Nombre] AS [Nombre], 
+    [Usuarios].[Correo] AS [Correo], 
+    [Usuarios].[Contrasena] AS [Contrasena]
+    FROM [dbo].[Usuarios] AS [Usuarios]</DefiningQuery>
+          </EntitySet>
           <AssociationSet Name="FK_Menus_Categorias" Association="Self.FK_Menus_Categorias">
             <End Role="Categorias" EntitySet="Categorias" />
             <End Role="Menus" EntitySet="Menus" />
@@ -570,7 +591,19 @@
             <Parameter Name="Telefono2" Mode="In" Type="Int32" />
             <Parameter Name="Correo" Mode="In" Type="String" />
           </FunctionImport>
+          <EntitySet Name="Usuarios" EntityType="RestauranteModel.Usuario" />
         </EntityContainer>
+        <EntityType Name="Usuario">
+          <Key>
+            <PropertyRef Name="Id_Usuario" />
+            <PropertyRef Name="Nombre" />
+            <PropertyRef Name="Correo" />
+          </Key>
+          <Property Name="Id_Usuario" Type="Int32" Nullable="false" />
+          <Property Name="Nombre" Type="String" Nullable="false" MaxLength="250" FixedLength="false" Unicode="true" />
+          <Property Name="Correo" Type="Int32" Nullable="false" />
+          <Property Name="Contrasena" Type="String" MaxLength="50" FixedLength="false" Unicode="true" />
+        </EntityType>
       </Schema>
     </edmx:ConceptualModels>
     <!-- C-S mapping content -->
@@ -664,6 +697,16 @@
           <FunctionImportMapping FunctionImportName="InsertarPostres" FunctionName="RestauranteModel.Store.InsertarPostres" />
           <FunctionImportMapping FunctionImportName="InsertarRestaurantes" FunctionName="RestauranteModel.Store.InsertarRestaurantes" />
           <FunctionImportMapping FunctionImportName="InsertarUbicaciones" FunctionName="RestauranteModel.Store.InsertarUbicaciones" />
+          <EntitySetMapping Name="Usuarios">
+            <EntityTypeMapping TypeName="RestauranteModel.Usuario">
+              <MappingFragment StoreEntitySet="Usuarios">
+                <ScalarProperty Name="Contrasena" ColumnName="Contrasena" />
+                <ScalarProperty Name="Correo" ColumnName="Correo" />
+                <ScalarProperty Name="Nombre" ColumnName="Nombre" />
+                <ScalarProperty Name="Id_Usuario" ColumnName="Id_Usuario" />
+              </MappingFragment>
+            </EntityTypeMapping>
+          </EntitySetMapping>
         </EntityContainerMapping>
       </Mapping>
     </edmx:Mappings>

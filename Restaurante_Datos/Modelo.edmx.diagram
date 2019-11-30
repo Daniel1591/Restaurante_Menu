@@ -22,6 +22,7 @@
         <AssociationConnector Association="RestauranteModel.FK_Restaurantes_Menus" ManuallyRouted="false" />
         <AssociationConnector Association="RestauranteModel.FK_Platos_Postres" ManuallyRouted="false" />
         <AssociationConnector Association="RestauranteModel.FK_Ubicaciones_Restaurantes" ManuallyRouted="false" />
+        <EntityTypeShape EntityType="RestauranteModel.Usuario" Width="1.5" PointX="7.375" PointY="0.75" />
       </Diagram>
     </edmx:Diagrams>
   </edmx:Designer>
