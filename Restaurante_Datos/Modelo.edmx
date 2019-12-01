@@ -86,7 +86,7 @@ advertencia 6002: La tabla o vista 'Restaurante.dbo.Usuarios' no tiene definida 
           </Key>
           <Property Name="Id_Usuario" Type="int" Nullable="false" />
           <Property Name="Nombre" Type="nvarchar" MaxLength="250" Nullable="false" />
-          <Property Name="Correo" Type="int" Nullable="false" />
+          <Property Name="Correo" Type="nvarchar" MaxLength="50" Nullable="false" />
           <Property Name="Contrasena" Type="nvarchar" MaxLength="50" />
         </EntityType>
         <Association Name="FK_Menus_Categorias">
@@ -601,7 +601,7 @@ advertencia 6002: La tabla o vista 'Restaurante.dbo.Usuarios' no tiene definida 
           </Key>
           <Property Name="Id_Usuario" Type="Int32" Nullable="false" />
           <Property Name="Nombre" Type="String" Nullable="false" MaxLength="250" FixedLength="false" Unicode="true" />
-          <Property Name="Correo" Type="Int32" Nullable="false" />
+          <Property Name="Correo" Type="String" Nullable="false" MaxLength="50" FixedLength="false" Unicode="true" />
           <Property Name="Contrasena" Type="String" MaxLength="50" FixedLength="false" Unicode="true" />
         </EntityType>
       </Schema>

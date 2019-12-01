@@ -16,7 +16,8 @@ namespace Restaurante_Datos
     {
         public int Id_Usuario { get; set; }
         public string Nombre { get; set; }
-        public int Correo { get; set; }
+        public string Correo { get; set; }
         public string Contrasena { get; set; }
+
     }
 }
