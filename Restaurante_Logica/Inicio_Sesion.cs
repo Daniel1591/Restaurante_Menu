@@ -15,7 +15,7 @@ namespace Restaurante_Logica
             //try
             //{
 
-            if("".Equals(email) && "".Equals(password))
+            if("johan".Equals(email) && "123".Equals(password))
             {
                 return true;
             }
