@@ -37,6 +37,15 @@ namespace Restaurante_Datos
         public virtual DbSet<Ubicacione> Ubicaciones { get; set; }
         public virtual DbSet<Usuario> Usuarios { get; set; }
     
+        public virtual int EliminarRestaurante(Nullable<int> id_Restaurante)
+        {
+            var id_RestauranteParameter = id_Restaurante.HasValue ?
+                new ObjectParameter("Id_Restaurante", id_Restaurante) :
+                new ObjectParameter("Id_Restaurante", typeof(int));
+    
+            return ((IObjectContextAdapter)this).ObjectContext.ExecuteFunction("EliminarRestaurante", id_RestauranteParameter);
+        }
+    
         public virtual int InsertarBebida(Nullable<int> id_Bebidas, string descripcion_Bebidas)
         {
             var id_BebidasParameter = id_Bebidas.HasValue ?
@@ -151,12 +160,8 @@ namespace Restaurante_Datos
             return ((IObjectContextAdapter)this).ObjectContext.ExecuteFunction("InsertarPostres", id_postresParameter, descripcion_postresParameter);
         }
     
-        public virtual int InsertarRestaurantes(Nullable<int> id_restaurante, string nombre, Nullable<int> id_Categorias, Nullable<int> id_Menu)
+        public virtual int InsertarRestaurantes(string nombre, Nullable<int> id_Categorias, Nullable<int> id_Menu)
         {
-            var id_restauranteParameter = id_restaurante.HasValue ?
-                new ObjectParameter("Id_restaurante", id_restaurante) :
-                new ObjectParameter("Id_restaurante", typeof(int));
-    
             var nombreParameter = nombre != null ?
                 new ObjectParameter("Nombre", nombre) :
                 new ObjectParameter("Nombre", typeof(string));
@@ -169,7 +174,7 @@ namespace Restaurante_Datos
                 new ObjectParameter("Id_Menu", id_Menu) :
                 new ObjectParameter("Id_Menu", typeof(int));
     
-            return ((IObjectContextAdapter)this).ObjectContext.ExecuteFunction("InsertarRestaurantes", id_restauranteParameter, nombreParameter, id_CategoriasParameter, id_MenuParameter);
+            return ((IObjectContextAdapter)this).ObjectContext.ExecuteFunction("InsertarRestaurantes", nombreParameter, id_CategoriasParameter, id_MenuParameter);
         }
     
         public virtual int InsertarUbicaciones(Nullable<int> id_Ubicación, string descripcion, Nullable<int> id_Restaurante, Nullable<int> telefono1, Nullable<int> telefono2, string correo)
@@ -199,6 +204,27 @@ namespace Restaurante_Datos
                 new ObjectParameter("Correo", typeof(string));
     
             return ((IObjectContextAdapter)this).ObjectContext.ExecuteFunction("InsertarUbicaciones", id_UbicaciónParameter, descripcionParameter, id_RestauranteParameter, telefono1Parameter, telefono2Parameter, correoParameter);
+        }
+    
+        public virtual int ModificarRestaurante(Nullable<int> id_Restaurante, string nombre, Nullable<int> id_Categoria, Nullable<int> id_Menu)
+        {
+            var id_RestauranteParameter = id_Restaurante.HasValue ?
+                new ObjectParameter("Id_Restaurante", id_Restaurante) :
+                new ObjectParameter("Id_Restaurante", typeof(int));
+    
+            var nombreParameter = nombre != null ?
+                new ObjectParameter("Nombre", nombre) :
+                new ObjectParameter("Nombre", typeof(string));
+    
+            var id_CategoriaParameter = id_Categoria.HasValue ?
+                new ObjectParameter("Id_Categoria", id_Categoria) :
+                new ObjectParameter("Id_Categoria", typeof(int));
+    
+            var id_MenuParameter = id_Menu.HasValue ?
+                new ObjectParameter("Id_Menu", id_Menu) :
+                new ObjectParameter("Id_Menu", typeof(int));
+    
+            return ((IObjectContextAdapter)this).ObjectContext.ExecuteFunction("ModificarRestaurante", id_RestauranteParameter, nombreParameter, id_CategoriaParameter, id_MenuParameter);
         }
     }
 }
