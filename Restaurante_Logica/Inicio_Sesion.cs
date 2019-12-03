@@ -9,25 +9,35 @@ namespace Restaurante_Logica
     public class Inicio_Sesion
     {
 
-        public Boolean validaCredenciales(String email, String password)
+        Restaurante_Datos.RestauranteEntities conexionBD = new Restaurante_Datos.RestauranteEntities();
+        public bool validaCredenciales(String email, String password)
         {
 
-            //try
-            //{
+            try
+            {
+                
+                var consulta = (from datos in conexionBD.Usuarios
+                                where datos.Correo == email && datos.Contrasena == password
+                                select datos).FirstOrDefault();
 
-            if("johan".Equals(email) && "123".Equals(password))
-            {
-                return true;
+                if (consulta.Correo.Equals(email) && consulta.Contrasena.Equals(password))
+                {
+
+                    return true;
+                } 
+                else
+                {
+
+                    return false;
+                }
+                
             }
-            else
+            catch (Exception ex)
             {
+
                 return false;
+                throw new Exception("SE HA PRODUCIDO UN ERROR" + ex.Message, ex);
             }
-
-            //} catch (Exception ex)
-            //{
-
-            //}
         }
 
     }

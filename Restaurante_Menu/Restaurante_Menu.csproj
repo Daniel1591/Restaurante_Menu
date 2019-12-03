@@ -241,6 +241,10 @@
     </None>
   </ItemGroup>
   <ItemGroup>
+    <ProjectReference Include="..\Restaurante_Datos\Restaurante_Datos.csproj">
+      <Project>{41efcc3a-1d73-4f2e-93eb-6e8d17e16d16}</Project>
+      <Name>Restaurante_Datos</Name>
+    </ProjectReference>
     <ProjectReference Include="..\Restaurante_Logica\Restaurante_Logica.csproj">
       <Project>{2cf5f423-9b2d-40ff-a05a-d290be52735a}</Project>
       <Name>Restaurante_Logica</Name>
