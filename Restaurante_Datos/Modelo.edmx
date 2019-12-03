@@ -9,28 +9,28 @@
           <Key>
             <PropertyRef Name="Id_Bebidas" />
           </Key>
-          <Property Name="Id_Bebidas" Type="int" Nullable="false" />
+          <Property Name="Id_Bebidas" Type="int" StoreGeneratedPattern="Identity" Nullable="false" />
           <Property Name="Descripcion_Bebidas" Type="nvarchar" MaxLength="50" Nullable="false" />
         </EntityType>
         <EntityType Name="Categorias">
           <Key>
             <PropertyRef Name="Id_Categoria" />
           </Key>
-          <Property Name="Id_Categoria" Type="int" Nullable="false" />
+          <Property Name="Id_Categoria" Type="int" StoreGeneratedPattern="Identity" Nullable="false" />
           <Property Name="Descripcion_Categoria" Type="nvarchar" MaxLength="50" Nullable="false" />
         </EntityType>
         <EntityType Name="Ensaladas">
           <Key>
             <PropertyRef Name="Id_Ensaladas" />
           </Key>
-          <Property Name="Id_Ensaladas" Type="int" Nullable="false" />
+          <Property Name="Id_Ensaladas" Type="int" StoreGeneratedPattern="Identity" Nullable="false" />
           <Property Name="Descripcion_Ensaladas" Type="nvarchar" MaxLength="50" Nullable="false" />
         </EntityType>
         <EntityType Name="Menus">
           <Key>
             <PropertyRef Name="Id_Menu" />
           </Key>
-          <Property Name="Id_Menu" Type="int" Nullable="false" />
+          <Property Name="Id_Menu" Type="int" StoreGeneratedPattern="Identity" Nullable="false" />
           <Property Name="Id_Categorias" Type="int" Nullable="false" />
           <Property Name="Id_Plato" Type="int" />
         </EntityType>
@@ -38,7 +38,7 @@
           <Key>
             <PropertyRef Name="Id_Plato" />
           </Key>
-          <Property Name="Id_Plato" Type="int" Nullable="false" />
+          <Property Name="Id_Plato" Type="int" StoreGeneratedPattern="Identity" Nullable="false" />
           <Property Name="Id_Menu" Type="int" Nullable="false" />
           <Property Name="Descripcion_Plato" Type="nvarchar" MaxLength="200" Nullable="false" />
           <Property Name="Id_Postres" Type="int" />
@@ -53,7 +53,7 @@
           <Key>
             <PropertyRef Name="Id_Postres" />
           </Key>
-          <Property Name="Id_Postres" Type="int" Nullable="false" />
+          <Property Name="Id_Postres" Type="int" StoreGeneratedPattern="Identity" Nullable="false" />
           <Property Name="Descripcion_Postres" Type="nvarchar" MaxLength="50" Nullable="false" />
         </EntityType>
         <EntityType Name="Restaurantes">
@@ -69,22 +69,18 @@
           <Key>
             <PropertyRef Name="Id_Ubicacion" />
           </Key>
-          <Property Name="Id_Ubicacion" Type="int" Nullable="false" />
+          <Property Name="Id_Ubicacion" Type="int" StoreGeneratedPattern="Identity" Nullable="false" />
           <Property Name="Descripcion" Type="nvarchar" MaxLength="250" Nullable="false" />
           <Property Name="Id_Restaurante" Type="int" Nullable="false" />
           <Property Name="Telefono1" Type="int" Nullable="false" />
           <Property Name="Telefono2" Type="int" />
           <Property Name="Correo" Type="nvarchar" MaxLength="50" />
         </EntityType>
-        <!--Errores durante la generación:
-advertencia 6002: La tabla o vista 'Restaurante.dbo.Usuarios' no tiene definida ninguna clave principal. Se ha inferido la clave y la definición se creado como una vista o tabla de solo lectura.-->
         <EntityType Name="Usuarios">
           <Key>
             <PropertyRef Name="Id_Usuario" />
-            <PropertyRef Name="Nombre" />
-            <PropertyRef Name="Correo" />
           </Key>
-          <Property Name="Id_Usuario" Type="int" Nullable="false" />
+          <Property Name="Id_Usuario" Type="int" StoreGeneratedPattern="Identity" Nullable="false" />
           <Property Name="Nombre" Type="nvarchar" MaxLength="250" Nullable="false" />
           <Property Name="Correo" Type="nvarchar" MaxLength="50" Nullable="false" />
           <Property Name="Contrasena" Type="nvarchar" MaxLength="50" />
@@ -197,28 +193,48 @@ advertencia 6002: La tabla o vista 'Restaurante.dbo.Usuarios' no tiene definida 
             </Dependent>
           </ReferentialConstraint>
         </Association>
+        <Function Name="ConsultarUsuario" Aggregate="false" BuiltIn="false" NiladicFunction="false" IsComposable="false" ParameterTypeSemantics="AllowImplicitConversion" Schema="dbo">
+          <Parameter Name="Correo" Type="nvarchar" Mode="In" />
+          <Parameter Name="Contrasena" Type="nvarchar" Mode="In" />
+        </Function>
+        <Function Name="EliminarBebida" Aggregate="false" BuiltIn="false" NiladicFunction="false" IsComposable="false" ParameterTypeSemantics="AllowImplicitConversion" Schema="dbo">
+          <Parameter Name="Id_Bebida" Type="int" Mode="In" />
+        </Function>
+        <Function Name="EliminarCategoria" Aggregate="false" BuiltIn="false" NiladicFunction="false" IsComposable="false" ParameterTypeSemantics="AllowImplicitConversion" Schema="dbo">
+          <Parameter Name="Id_Categoria" Type="int" Mode="In" />
+        </Function>
+        <Function Name="EliminarEnsalada" Aggregate="false" BuiltIn="false" NiladicFunction="false" IsComposable="false" ParameterTypeSemantics="AllowImplicitConversion" Schema="dbo">
+          <Parameter Name="Id_Ensalada" Type="int" Mode="In" />
+        </Function>
+        <Function Name="EliminarMenu" Aggregate="false" BuiltIn="false" NiladicFunction="false" IsComposable="false" ParameterTypeSemantics="AllowImplicitConversion" Schema="dbo">
+          <Parameter Name="Id_Menu" Type="int" Mode="In" />
+        </Function>
+        <Function Name="EliminarPlato" Aggregate="false" BuiltIn="false" NiladicFunction="false" IsComposable="false" ParameterTypeSemantics="AllowImplicitConversion" Schema="dbo">
+          <Parameter Name="Id_Plato" Type="int" Mode="In" />
+        </Function>
+        <Function Name="EliminarPostre" Aggregate="false" BuiltIn="false" NiladicFunction="false" IsComposable="false" ParameterTypeSemantics="AllowImplicitConversion" Schema="dbo">
+          <Parameter Name="Id_Postre" Type="int" Mode="In" />
+        </Function>
         <Function Name="EliminarRestaurante" Aggregate="false" BuiltIn="false" NiladicFunction="false" IsComposable="false" ParameterTypeSemantics="AllowImplicitConversion" Schema="dbo">
           <Parameter Name="Id_Restaurante" Type="int" Mode="In" />
         </Function>
+        <Function Name="EliminarUbicacion" Aggregate="false" BuiltIn="false" NiladicFunction="false" IsComposable="false" ParameterTypeSemantics="AllowImplicitConversion" Schema="dbo">
+          <Parameter Name="Id_Ubicacion" Type="int" Mode="In" />
+        </Function>
         <Function Name="InsertarBebida" Aggregate="false" BuiltIn="false" NiladicFunction="false" IsComposable="false" ParameterTypeSemantics="AllowImplicitConversion" Schema="dbo">
-          <Parameter Name="Id_Bebidas" Type="int" Mode="In" />
           <Parameter Name="Descripcion_Bebidas" Type="nvarchar" Mode="In" />
         </Function>
         <Function Name="InsertarCategorias" Aggregate="false" BuiltIn="false" NiladicFunction="false" IsComposable="false" ParameterTypeSemantics="AllowImplicitConversion" Schema="dbo">
-          <Parameter Name="Id_Categoria" Type="int" Mode="In" />
           <Parameter Name="Descripcion_categoria" Type="nvarchar" Mode="In" />
         </Function>
         <Function Name="InsertarEnsaladas" Aggregate="false" BuiltIn="false" NiladicFunction="false" IsComposable="false" ParameterTypeSemantics="AllowImplicitConversion" Schema="dbo">
-          <Parameter Name="Id_Ensaladas" Type="int" Mode="In" />
           <Parameter Name="Descripcion_Ensaladas" Type="nvarchar" Mode="In" />
         </Function>
         <Function Name="InsertarMenus" Aggregate="false" BuiltIn="false" NiladicFunction="false" IsComposable="false" ParameterTypeSemantics="AllowImplicitConversion" Schema="dbo">
-          <Parameter Name="Id_Menu" Type="int" Mode="In" />
           <Parameter Name="Id_Categorias" Type="int" Mode="In" />
           <Parameter Name="Id_Plato" Type="int" Mode="In" />
         </Function>
         <Function Name="InsertarPlatos" Aggregate="false" BuiltIn="false" NiladicFunction="false" IsComposable="false" ParameterTypeSemantics="AllowImplicitConversion" Schema="dbo">
-          <Parameter Name="Id_Plato" Type="int" Mode="In" />
           <Parameter Name="Id_Menu" Type="int" Mode="In" />
           <Parameter Name="Descripción_Plato" Type="nvarchar" Mode="In" />
           <Parameter Name="Id_postres" Type="int" Mode="In" />
@@ -230,7 +246,6 @@ advertencia 6002: La tabla o vista 'Restaurante.dbo.Usuarios' no tiene definida 
           <Parameter Name="Imagen" Type="nvarchar" Mode="In" />
         </Function>
         <Function Name="InsertarPostres" Aggregate="false" BuiltIn="false" NiladicFunction="false" IsComposable="false" ParameterTypeSemantics="AllowImplicitConversion" Schema="dbo">
-          <Parameter Name="Id_postres" Type="int" Mode="In" />
           <Parameter Name="Descripcion_postres" Type="nvarchar" Mode="In" />
         </Function>
         <Function Name="InsertarRestaurantes" Aggregate="false" BuiltIn="false" NiladicFunction="false" IsComposable="false" ParameterTypeSemantics="AllowImplicitConversion" Schema="dbo">
@@ -239,18 +254,58 @@ advertencia 6002: La tabla o vista 'Restaurante.dbo.Usuarios' no tiene definida 
           <Parameter Name="Id_Menu" Type="int" Mode="In" />
         </Function>
         <Function Name="InsertarUbicaciones" Aggregate="false" BuiltIn="false" NiladicFunction="false" IsComposable="false" ParameterTypeSemantics="AllowImplicitConversion" Schema="dbo">
-          <Parameter Name="Id_Ubicación" Type="int" Mode="In" />
           <Parameter Name="Descripcion" Type="nvarchar" Mode="In" />
           <Parameter Name="Id_Restaurante" Type="int" Mode="In" />
           <Parameter Name="Telefono1" Type="int" Mode="In" />
           <Parameter Name="Telefono2" Type="int" Mode="In" />
           <Parameter Name="Correo" Type="nvarchar" Mode="In" />
         </Function>
+        <Function Name="ModificarBebida" Aggregate="false" BuiltIn="false" NiladicFunction="false" IsComposable="false" ParameterTypeSemantics="AllowImplicitConversion" Schema="dbo">
+          <Parameter Name="Id_Bebida" Type="int" Mode="In" />
+          <Parameter Name="Descripcion" Type="nvarchar" Mode="In" />
+        </Function>
+        <Function Name="ModificarCategoria" Aggregate="false" BuiltIn="false" NiladicFunction="false" IsComposable="false" ParameterTypeSemantics="AllowImplicitConversion" Schema="dbo">
+          <Parameter Name="Id_Categoria" Type="int" Mode="In" />
+          <Parameter Name="Descripcion" Type="nvarchar" Mode="In" />
+        </Function>
+        <Function Name="ModificarEnsalada" Aggregate="false" BuiltIn="false" NiladicFunction="false" IsComposable="false" ParameterTypeSemantics="AllowImplicitConversion" Schema="dbo">
+          <Parameter Name="Id_Ensalada" Type="int" Mode="In" />
+          <Parameter Name="Descripcion" Type="nvarchar" Mode="In" />
+        </Function>
+        <Function Name="ModificarMenu" Aggregate="false" BuiltIn="false" NiladicFunction="false" IsComposable="false" ParameterTypeSemantics="AllowImplicitConversion" Schema="dbo">
+          <Parameter Name="Id_Menu" Type="int" Mode="In" />
+          <Parameter Name="Id_Categoria" Type="int" Mode="In" />
+          <Parameter Name="Id_Plato" Type="int" Mode="In" />
+        </Function>
+        <Function Name="ModificarPlato" Aggregate="false" BuiltIn="false" NiladicFunction="false" IsComposable="false" ParameterTypeSemantics="AllowImplicitConversion" Schema="dbo">
+          <Parameter Name="Id_Plato" Type="int" Mode="In" />
+          <Parameter Name="Id_Menu" Type="int" Mode="In" />
+          <Parameter Name="Id_Postre" Type="int" Mode="In" />
+          <Parameter Name="Id_Ensalada" Type="int" Mode="In" />
+          <Parameter Name="Id_Bebida" Type="int" Mode="In" />
+          <Parameter Name="Descripcion" Type="nvarchar" Mode="In" />
+          <Parameter Name="Combo_Plato" Type="bit" Mode="In" />
+          <Parameter Name="Promocion_Plato" Type="bit" Mode="In" />
+          <Parameter Name="Valor_Plato" Type="money" Mode="In" />
+          <Parameter Name="Imagen" Type="nvarchar" Mode="In" />
+        </Function>
+        <Function Name="ModificarPostre" Aggregate="false" BuiltIn="false" NiladicFunction="false" IsComposable="false" ParameterTypeSemantics="AllowImplicitConversion" Schema="dbo">
+          <Parameter Name="Id_Postre" Type="int" Mode="In" />
+          <Parameter Name="Descripcion" Type="nvarchar" Mode="In" />
+        </Function>
         <Function Name="ModificarRestaurante" Aggregate="false" BuiltIn="false" NiladicFunction="false" IsComposable="false" ParameterTypeSemantics="AllowImplicitConversion" Schema="dbo">
           <Parameter Name="Id_Restaurante" Type="int" Mode="In" />
           <Parameter Name="Nombre" Type="nvarchar" Mode="In" />
           <Parameter Name="Id_Categoria" Type="int" Mode="In" />
           <Parameter Name="Id_Menu" Type="int" Mode="In" />
+        </Function>
+        <Function Name="ModificarUbicacion" Aggregate="false" BuiltIn="false" NiladicFunction="false" IsComposable="false" ParameterTypeSemantics="AllowImplicitConversion" Schema="dbo">
+          <Parameter Name="Id_Ubicacion" Type="int" Mode="In" />
+          <Parameter Name="Id_Restaurante" Type="int" Mode="In" />
+          <Parameter Name="Descripcion" Type="nvarchar" Mode="In" />
+          <Parameter Name="Telefono1" Type="int" Mode="In" />
+          <Parameter Name="Telefono2" Type="int" Mode="In" />
+          <Parameter Name="Correo" Type="nvarchar" Mode="In" />
         </Function>
         <EntityContainer Name="RestauranteModelStoreContainer">
           <EntitySet Name="Bebidas" EntityType="Self.Bebidas" Schema="dbo" store:Type="Tables" />
@@ -261,14 +316,7 @@ advertencia 6002: La tabla o vista 'Restaurante.dbo.Usuarios' no tiene definida 
           <EntitySet Name="Postres" EntityType="Self.Postres" Schema="dbo" store:Type="Tables" />
           <EntitySet Name="Restaurantes" EntityType="Self.Restaurantes" Schema="dbo" store:Type="Tables" />
           <EntitySet Name="Ubicaciones" EntityType="Self.Ubicaciones" Schema="dbo" store:Type="Tables" />
-          <EntitySet Name="Usuarios" EntityType="Self.Usuarios" store:Type="Tables" store:Schema="dbo">
-            <DefiningQuery>SELECT 
-    [Usuarios].[Id_Usuario] AS [Id_Usuario], 
-    [Usuarios].[Nombre] AS [Nombre], 
-    [Usuarios].[Correo] AS [Correo], 
-    [Usuarios].[Contrasena] AS [Contrasena]
-    FROM [dbo].[Usuarios] AS [Usuarios]</DefiningQuery>
-          </EntitySet>
+          <EntitySet Name="Usuarios" EntityType="Self.Usuarios" Schema="dbo" store:Type="Tables" />
           <AssociationSet Name="FK_Menus_Categorias" Association="Self.FK_Menus_Categorias">
             <End Role="Categorias" EntitySet="Categorias" />
             <End Role="Menus" EntitySet="Menus" />
@@ -315,7 +363,7 @@ advertencia 6002: La tabla o vista 'Restaurante.dbo.Usuarios' no tiene definida 
           <Key>
             <PropertyRef Name="Id_Bebidas" />
           </Key>
-          <Property Name="Id_Bebidas" Type="Int32" Nullable="false" />
+          <Property Name="Id_Bebidas" Type="Int32" Nullable="false" annotation:StoreGeneratedPattern="Identity" />
           <Property Name="Descripcion_Bebidas" Type="String" MaxLength="50" FixedLength="false" Unicode="true" Nullable="false" />
           <NavigationProperty Name="Platos" Relationship="Self.FK_Platos_Bebidas" FromRole="Bebidas" ToRole="Platos" />
         </EntityType>
@@ -323,7 +371,7 @@ advertencia 6002: La tabla o vista 'Restaurante.dbo.Usuarios' no tiene definida 
           <Key>
             <PropertyRef Name="Id_Categoria" />
           </Key>
-          <Property Name="Id_Categoria" Type="Int32" Nullable="false" />
+          <Property Name="Id_Categoria" Type="Int32" Nullable="false" annotation:StoreGeneratedPattern="Identity" />
           <Property Name="Descripcion_Categoria" Type="String" MaxLength="50" FixedLength="false" Unicode="true" Nullable="false" />
           <NavigationProperty Name="Menus" Relationship="Self.FK_Menus_Categorias" FromRole="Categorias" ToRole="Menus" />
           <NavigationProperty Name="Restaurantes" Relationship="Self.FK_Restaurantes_Categorias" FromRole="Categorias" ToRole="Restaurantes" />
@@ -332,7 +380,7 @@ advertencia 6002: La tabla o vista 'Restaurante.dbo.Usuarios' no tiene definida 
           <Key>
             <PropertyRef Name="Id_Ensaladas" />
           </Key>
-          <Property Name="Id_Ensaladas" Type="Int32" Nullable="false" />
+          <Property Name="Id_Ensaladas" Type="Int32" Nullable="false" annotation:StoreGeneratedPattern="Identity" />
           <Property Name="Descripcion_Ensaladas" Type="String" MaxLength="50" FixedLength="false" Unicode="true" Nullable="false" />
           <NavigationProperty Name="Platos" Relationship="Self.FK_Platos_Ensaladas" FromRole="Ensaladas" ToRole="Platos" />
         </EntityType>
@@ -340,7 +388,7 @@ advertencia 6002: La tabla o vista 'Restaurante.dbo.Usuarios' no tiene definida 
           <Key>
             <PropertyRef Name="Id_Menu" />
           </Key>
-          <Property Name="Id_Menu" Type="Int32" Nullable="false" />
+          <Property Name="Id_Menu" Type="Int32" Nullable="false" annotation:StoreGeneratedPattern="Identity" />
           <Property Name="Id_Categorias" Type="Int32" Nullable="false" />
           <Property Name="Id_Plato" Type="Int32" />
           <NavigationProperty Name="Categoria" Relationship="Self.FK_Menus_Categorias" FromRole="Menus" ToRole="Categorias" />
@@ -352,7 +400,7 @@ advertencia 6002: La tabla o vista 'Restaurante.dbo.Usuarios' no tiene definida 
           <Key>
             <PropertyRef Name="Id_Plato" />
           </Key>
-          <Property Name="Id_Plato" Type="Int32" Nullable="false" />
+          <Property Name="Id_Plato" Type="Int32" Nullable="false" annotation:StoreGeneratedPattern="Identity" />
           <Property Name="Id_Menu" Type="Int32" Nullable="false" />
           <Property Name="Descripcion_Plato" Type="String" MaxLength="200" FixedLength="false" Unicode="true" Nullable="false" />
           <Property Name="Id_Postres" Type="Int32" />
@@ -372,7 +420,7 @@ advertencia 6002: La tabla o vista 'Restaurante.dbo.Usuarios' no tiene definida 
           <Key>
             <PropertyRef Name="Id_Postres" />
           </Key>
-          <Property Name="Id_Postres" Type="Int32" Nullable="false" />
+          <Property Name="Id_Postres" Type="Int32" Nullable="false" annotation:StoreGeneratedPattern="Identity" />
           <Property Name="Descripcion_Postres" Type="String" MaxLength="50" FixedLength="false" Unicode="true" Nullable="false" />
           <NavigationProperty Name="Platos" Relationship="Self.FK_Platos_Postres" FromRole="Postres" ToRole="Platos" />
         </EntityType>
@@ -392,7 +440,7 @@ advertencia 6002: La tabla o vista 'Restaurante.dbo.Usuarios' no tiene definida 
           <Key>
             <PropertyRef Name="Id_Ubicacion" />
           </Key>
-          <Property Name="Id_Ubicacion" Type="Int32" Nullable="false" />
+          <Property Name="Id_Ubicacion" Type="Int32" Nullable="false" annotation:StoreGeneratedPattern="Identity" />
           <Property Name="Descripcion" Type="String" MaxLength="250" FixedLength="false" Unicode="true" Nullable="false" />
           <Property Name="Id_Restaurante" Type="Int32" Nullable="false" />
           <Property Name="Telefono1" Type="Int32" Nullable="false" />
@@ -403,10 +451,8 @@ advertencia 6002: La tabla o vista 'Restaurante.dbo.Usuarios' no tiene definida 
         <EntityType Name="Usuario">
           <Key>
             <PropertyRef Name="Id_Usuario" />
-            <PropertyRef Name="Nombre" />
-            <PropertyRef Name="Correo" />
           </Key>
-          <Property Name="Id_Usuario" Type="Int32" Nullable="false" />
+          <Property Name="Id_Usuario" Type="Int32" Nullable="false" annotation:StoreGeneratedPattern="Identity" />
           <Property Name="Nombre" Type="String" MaxLength="250" FixedLength="false" Unicode="true" Nullable="false" />
           <Property Name="Correo" Type="String" MaxLength="50" FixedLength="false" Unicode="true" Nullable="false" />
           <Property Name="Contrasena" Type="String" MaxLength="50" FixedLength="false" Unicode="true" />
@@ -565,28 +611,48 @@ advertencia 6002: La tabla o vista 'Restaurante.dbo.Usuarios' no tiene definida 
             <End Role="Restaurantes" EntitySet="Restaurantes" />
             <End Role="Ubicaciones" EntitySet="Ubicaciones" />
           </AssociationSet>
+          <FunctionImport Name="ConsultarUsuario" ReturnType="Collection(String)">
+            <Parameter Name="Correo" Mode="In" Type="String" />
+            <Parameter Name="Contrasena" Mode="In" Type="String" />
+          </FunctionImport>
+          <FunctionImport Name="EliminarBebida">
+            <Parameter Name="Id_Bebida" Mode="In" Type="Int32" />
+          </FunctionImport>
+          <FunctionImport Name="EliminarCategoria">
+            <Parameter Name="Id_Categoria" Mode="In" Type="Int32" />
+          </FunctionImport>
+          <FunctionImport Name="EliminarEnsalada">
+            <Parameter Name="Id_Ensalada" Mode="In" Type="Int32" />
+          </FunctionImport>
+          <FunctionImport Name="EliminarMenu">
+            <Parameter Name="Id_Menu" Mode="In" Type="Int32" />
+          </FunctionImport>
+          <FunctionImport Name="EliminarPlato">
+            <Parameter Name="Id_Plato" Mode="In" Type="Int32" />
+          </FunctionImport>
+          <FunctionImport Name="EliminarPostre">
+            <Parameter Name="Id_Postre" Mode="In" Type="Int32" />
+          </FunctionImport>
           <FunctionImport Name="EliminarRestaurante">
             <Parameter Name="Id_Restaurante" Mode="In" Type="Int32" />
           </FunctionImport>
+          <FunctionImport Name="EliminarUbicacion">
+            <Parameter Name="Id_Ubicacion" Mode="In" Type="Int32" />
+          </FunctionImport>
           <FunctionImport Name="InsertarBebida">
-            <Parameter Name="Id_Bebidas" Mode="In" Type="Int32" />
             <Parameter Name="Descripcion_Bebidas" Mode="In" Type="String" />
           </FunctionImport>
           <FunctionImport Name="InsertarCategorias">
-            <Parameter Name="Id_Categoria" Mode="In" Type="Int32" />
             <Parameter Name="Descripcion_categoria" Mode="In" Type="String" />
           </FunctionImport>
           <FunctionImport Name="InsertarEnsaladas">
-            <Parameter Name="Id_Ensaladas" Mode="In" Type="Int32" />
             <Parameter Name="Descripcion_Ensaladas" Mode="In" Type="String" />
           </FunctionImport>
           <FunctionImport Name="InsertarMenus">
-            <Parameter Name="Id_Menu" Mode="In" Type="Int32" />
             <Parameter Name="Id_Categorias" Mode="In" Type="Int32" />
             <Parameter Name="Id_Plato" Mode="In" Type="Int32" />
           </FunctionImport>
           <FunctionImport Name="InsertarPlatos">
-            <Parameter Name="Id_Plato" Mode="In" Type="Int32" />
             <Parameter Name="Id_Menu" Mode="In" Type="Int32" />
             <Parameter Name="Descripción_Plato" Mode="In" Type="String" />
             <Parameter Name="Id_postres" Mode="In" Type="Int32" />
@@ -598,7 +664,6 @@ advertencia 6002: La tabla o vista 'Restaurante.dbo.Usuarios' no tiene definida 
             <Parameter Name="Imagen" Mode="In" Type="String" />
           </FunctionImport>
           <FunctionImport Name="InsertarPostres">
-            <Parameter Name="Id_postres" Mode="In" Type="Int32" />
             <Parameter Name="Descripcion_postres" Mode="In" Type="String" />
           </FunctionImport>
           <FunctionImport Name="InsertarRestaurantes">
@@ -607,18 +672,58 @@ advertencia 6002: La tabla o vista 'Restaurante.dbo.Usuarios' no tiene definida 
             <Parameter Name="Id_Menu" Mode="In" Type="Int32" />
           </FunctionImport>
           <FunctionImport Name="InsertarUbicaciones">
-            <Parameter Name="Id_Ubicación" Mode="In" Type="Int32" />
             <Parameter Name="Descripcion" Mode="In" Type="String" />
             <Parameter Name="Id_Restaurante" Mode="In" Type="Int32" />
             <Parameter Name="Telefono1" Mode="In" Type="Int32" />
             <Parameter Name="Telefono2" Mode="In" Type="Int32" />
             <Parameter Name="Correo" Mode="In" Type="String" />
           </FunctionImport>
+          <FunctionImport Name="ModificarBebida">
+            <Parameter Name="Id_Bebida" Mode="In" Type="Int32" />
+            <Parameter Name="Descripcion" Mode="In" Type="String" />
+          </FunctionImport>
+          <FunctionImport Name="ModificarCategoria">
+            <Parameter Name="Id_Categoria" Mode="In" Type="Int32" />
+            <Parameter Name="Descripcion" Mode="In" Type="String" />
+          </FunctionImport>
+          <FunctionImport Name="ModificarEnsalada">
+            <Parameter Name="Id_Ensalada" Mode="In" Type="Int32" />
+            <Parameter Name="Descripcion" Mode="In" Type="String" />
+          </FunctionImport>
+          <FunctionImport Name="ModificarMenu">
+            <Parameter Name="Id_Menu" Mode="In" Type="Int32" />
+            <Parameter Name="Id_Categoria" Mode="In" Type="Int32" />
+            <Parameter Name="Id_Plato" Mode="In" Type="Int32" />
+          </FunctionImport>
+          <FunctionImport Name="ModificarPlato">
+            <Parameter Name="Id_Plato" Mode="In" Type="Int32" />
+            <Parameter Name="Id_Menu" Mode="In" Type="Int32" />
+            <Parameter Name="Id_Postre" Mode="In" Type="Int32" />
+            <Parameter Name="Id_Ensalada" Mode="In" Type="Int32" />
+            <Parameter Name="Id_Bebida" Mode="In" Type="Int32" />
+            <Parameter Name="Descripcion" Mode="In" Type="String" />
+            <Parameter Name="Combo_Plato" Mode="In" Type="Boolean" />
+            <Parameter Name="Promocion_Plato" Mode="In" Type="Boolean" />
+            <Parameter Name="Valor_Plato" Mode="In" Type="Decimal" />
+            <Parameter Name="Imagen" Mode="In" Type="String" />
+          </FunctionImport>
+          <FunctionImport Name="ModificarPostre">
+            <Parameter Name="Id_Postre" Mode="In" Type="Int32" />
+            <Parameter Name="Descripcion" Mode="In" Type="String" />
+          </FunctionImport>
           <FunctionImport Name="ModificarRestaurante">
             <Parameter Name="Id_Restaurante" Mode="In" Type="Int32" />
             <Parameter Name="Nombre" Mode="In" Type="String" />
             <Parameter Name="Id_Categoria" Mode="In" Type="Int32" />
             <Parameter Name="Id_Menu" Mode="In" Type="Int32" />
+          </FunctionImport>
+          <FunctionImport Name="ModificarUbicacion">
+            <Parameter Name="Id_Ubicacion" Mode="In" Type="Int32" />
+            <Parameter Name="Id_Restaurante" Mode="In" Type="Int32" />
+            <Parameter Name="Descripcion" Mode="In" Type="String" />
+            <Parameter Name="Telefono1" Mode="In" Type="Int32" />
+            <Parameter Name="Telefono2" Mode="In" Type="Int32" />
+            <Parameter Name="Correo" Mode="In" Type="String" />
           </FunctionImport>
         </EntityContainer>
       </Schema>
@@ -716,7 +821,15 @@ advertencia 6002: La tabla o vista 'Restaurante.dbo.Usuarios' no tiene definida 
               </MappingFragment>
             </EntityTypeMapping>
           </EntitySetMapping>
+          <FunctionImportMapping FunctionImportName="ConsultarUsuario" FunctionName="RestauranteModel.Store.ConsultarUsuario" />
+          <FunctionImportMapping FunctionImportName="EliminarBebida" FunctionName="RestauranteModel.Store.EliminarBebida" />
+          <FunctionImportMapping FunctionImportName="EliminarCategoria" FunctionName="RestauranteModel.Store.EliminarCategoria" />
+          <FunctionImportMapping FunctionImportName="EliminarEnsalada" FunctionName="RestauranteModel.Store.EliminarEnsalada" />
+          <FunctionImportMapping FunctionImportName="EliminarMenu" FunctionName="RestauranteModel.Store.EliminarMenu" />
+          <FunctionImportMapping FunctionImportName="EliminarPlato" FunctionName="RestauranteModel.Store.EliminarPlato" />
+          <FunctionImportMapping FunctionImportName="EliminarPostre" FunctionName="RestauranteModel.Store.EliminarPostre" />
           <FunctionImportMapping FunctionImportName="EliminarRestaurante" FunctionName="RestauranteModel.Store.EliminarRestaurante" />
+          <FunctionImportMapping FunctionImportName="EliminarUbicacion" FunctionName="RestauranteModel.Store.EliminarUbicacion" />
           <FunctionImportMapping FunctionImportName="InsertarBebida" FunctionName="RestauranteModel.Store.InsertarBebida" />
           <FunctionImportMapping FunctionImportName="InsertarCategorias" FunctionName="RestauranteModel.Store.InsertarCategorias" />
           <FunctionImportMapping FunctionImportName="InsertarEnsaladas" FunctionName="RestauranteModel.Store.InsertarEnsaladas" />
@@ -725,7 +838,14 @@ advertencia 6002: La tabla o vista 'Restaurante.dbo.Usuarios' no tiene definida 
           <FunctionImportMapping FunctionImportName="InsertarPostres" FunctionName="RestauranteModel.Store.InsertarPostres" />
           <FunctionImportMapping FunctionImportName="InsertarRestaurantes" FunctionName="RestauranteModel.Store.InsertarRestaurantes" />
           <FunctionImportMapping FunctionImportName="InsertarUbicaciones" FunctionName="RestauranteModel.Store.InsertarUbicaciones" />
+          <FunctionImportMapping FunctionImportName="ModificarBebida" FunctionName="RestauranteModel.Store.ModificarBebida" />
+          <FunctionImportMapping FunctionImportName="ModificarCategoria" FunctionName="RestauranteModel.Store.ModificarCategoria" />
+          <FunctionImportMapping FunctionImportName="ModificarEnsalada" FunctionName="RestauranteModel.Store.ModificarEnsalada" />
+          <FunctionImportMapping FunctionImportName="ModificarMenu" FunctionName="RestauranteModel.Store.ModificarMenu" />
+          <FunctionImportMapping FunctionImportName="ModificarPlato" FunctionName="RestauranteModel.Store.ModificarPlato" />
+          <FunctionImportMapping FunctionImportName="ModificarPostre" FunctionName="RestauranteModel.Store.ModificarPostre" />
           <FunctionImportMapping FunctionImportName="ModificarRestaurante" FunctionName="RestauranteModel.Store.ModificarRestaurante" />
+          <FunctionImportMapping FunctionImportName="ModificarUbicacion" FunctionName="RestauranteModel.Store.ModificarUbicacion" />
         </EntityContainerMapping>
       </Mapping>
     </edmx:Mappings>
