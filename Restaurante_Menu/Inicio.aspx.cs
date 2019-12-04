@@ -5,13 +5,13 @@ using System.Web;
 using System.Web.UI;
 using System.Web.UI.WebControls;
 using Restaurante_Logica;
-using System.Data;
+using Restaurante_Datos;
 
 namespace Restaurante_Menu
 {
     public partial class Inicio : System.Web.UI.Page
     {
-        Restaurante_Logica.Inicio_Sesion usuario = new Restaurante_Logica.Inicio_Sesion();
+        Restaurante_Logica.Inicio_Sesion usuarios = new Restaurante_Logica.Inicio_Sesion();
 
         protected void Page_Load(object sender, EventArgs e)
         {
@@ -25,11 +25,12 @@ namespace Restaurante_Menu
             if (Page.IsValid)
             {
 
+                
 
                 try
                 {
-
-                    if (usuario.validaCredenciales(this.txtEmail.Text, this.txtClave.Text))
+                    Usuario usuario = null;
+                    if (usuarios.validaCredenciales(this.txtEmail.Text, this.txtClave.Text, out usuario))
                     {
                         Page.Session.Add("sesion", usuario);
 
