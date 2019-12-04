@@ -50,6 +50,8 @@
     <Reference Include="System.Xml" />
   </ItemGroup>
   <ItemGroup>
+    <Compile Include="AccionesCategorias.cs" />
+    <Compile Include="AccionesRestaurantes.cs" />
     <Compile Include="Administracion_General_Restaurantes.cs" />
     <Compile Include="Inicio_Sesion.cs" />
     <Compile Include="Properties\AssemblyInfo.cs" />

@@ -120,6 +120,7 @@
     <Content Include="Content\Site.css" />
     <Content Include="Css\Inicio.css" />
     <Content Include="Default.aspx" />
+    <Content Include="EditarRestaurante.aspx" />
     <Content Include="favicon.ico" />
     <Content Include="fonts\glyphicons-halflings-regular.svg" />
     <Content Include="Global.asax" />
@@ -192,6 +193,13 @@
     </Compile>
     <Compile Include="Default.aspx.designer.cs">
       <DependentUpon>Default.aspx</DependentUpon>
+    </Compile>
+    <Compile Include="EditarRestaurante.aspx.cs">
+      <DependentUpon>EditarRestaurante.aspx</DependentUpon>
+      <SubType>ASPXCodeBehind</SubType>
+    </Compile>
+    <Compile Include="EditarRestaurante.aspx.designer.cs">
+      <DependentUpon>EditarRestaurante.aspx</DependentUpon>
     </Compile>
     <Compile Include="Global.asax.cs">
       <DependentUpon>Global.asax</DependentUpon>
