@@ -15,7 +15,6 @@ namespace Restaurante_Logica
         Restaurante_Datos.RestauranteEntities conexionBD = new Restaurante_Datos.RestauranteEntities();
         public bool validaCredenciales(String email, String password, out Usuario usuariOutput)
         {
-
             
                 string encriptada = this.encriptarClaveUsuario(password);
 
