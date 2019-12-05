@@ -55,6 +55,26 @@ html {
   -webkit-tap-highlight-color: rgba(0, 0, 0, 0);
 }
 
+.mr-iniciar
+.mx-iniciar {
+  margin-right: 0.25rem !important;
+}
+
+
+.navbar-Iniciar {
+  display: inline-block;
+  padding-top: .3125rem;
+  padding-bottom: 0.3125rem;
+  padding-left:79rem;
+  margin-right: 1rem;
+  font-size: 1.25rem;
+  line-height: inherit;
+  white-space: nowrap;
+ color:white ;
+}
+
+
+
 article, aside, figcaption, figure, footer, header, hgroup, main, nav, section {
   display: block;
 }
@@ -8470,7 +8490,7 @@ button.bg-dark:focus {
   margin-top: 0.25rem !important;
 }
 
-.mr-1,
+mr-1,
 .mx-1 {
   margin-right: 0.25rem !important;
 }

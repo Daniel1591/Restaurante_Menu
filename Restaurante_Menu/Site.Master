@@ -51,8 +51,8 @@
                 </div>
                 <div class="navbar-collapse collapse">
                     <ul class="nav navbar-nav">
-                        <li><a runat="server" href="Inicio.aspx">Iniciar sesion</a></li>                        
-                        <li><a runat="server" href="Dashboard.aspx">Dashboard</a></li>
+                        <li><a runat="server" id="IniciarSesion" href="Inicio.aspx">Iniciar sesion</a></li>                        
+                        <li><a runat="server" id="Dashboard" href="Dashboard.aspx">Dashboard</a></li>
                     </ul>
                 </div>
             </div>
