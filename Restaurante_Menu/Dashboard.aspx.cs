@@ -8,7 +8,7 @@ using System.Drawing;
 
 namespace Restaurante_Menu
 {
-    public partial class AdministracionRestaurantes : System.Web.UI.Page
+    public partial class Dashboard : System.Web.UI.Page
     {
 
         Restaurante_Logica.Administracion_General_Restaurantes conexion = new Restaurante_Logica.Administracion_General_Restaurantes();
@@ -43,7 +43,6 @@ namespace Restaurante_Menu
             conexion.eliminarRestaurantes(Convert.ToInt32(Session["id"]));
             cargarTabla();
         }
-
 
     }
 }

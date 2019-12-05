@@ -76,12 +76,13 @@ namespace Restaurante_Menu
 				}
 
 				// Mostrar mensaje de salvado correctamente.
-				Response.Redirect("~/Default.aspx");
+				Response.Redirect("~/Dashboard.aspx");
 			}
 			catch (Exception ex)
 			{
 				this.lblMensaje.Text = ex.GetBaseException().Message;
 			}
 		}
+
 	}
 }

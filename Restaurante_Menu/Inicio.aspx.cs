@@ -34,7 +34,7 @@ namespace Restaurante_Menu
                     {
                         Page.Session.Add("sesion", usuario);
 
-                        Response.Redirect("~/Default.aspx");
+                        Response.Redirect("~/Dashboard.aspx");
                     }
                     else
                     {
