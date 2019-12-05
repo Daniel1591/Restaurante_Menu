@@ -15,7 +15,7 @@ namespace Restaurante_Menu
 
 		protected void Page_Load(object sender, EventArgs e)
 		{
-			if(!Page.IsPostBack)
+			if (!Page.IsPostBack)
 			{
 				this.cargarCategorias();
 				this.cargarRestaurante();
