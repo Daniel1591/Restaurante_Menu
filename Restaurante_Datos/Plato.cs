@@ -35,7 +35,6 @@ namespace Restaurante_Datos
         public virtual Ensalada Ensalada { get; set; }
         [System.Diagnostics.CodeAnalysis.SuppressMessage("Microsoft.Usage", "CA2227:CollectionPropertiesShouldBeReadOnly")]
         public virtual ICollection<Menu> Menus { get; set; }
-        public virtual Menu Menu { get; set; }
         public virtual Postre Postre { get; set; }
     }
 }

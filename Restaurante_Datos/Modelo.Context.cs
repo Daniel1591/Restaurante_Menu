@@ -37,19 +37,6 @@ namespace Restaurante_Datos
         public virtual DbSet<Ubicacione> Ubicaciones { get; set; }
         public virtual DbSet<Usuario> Usuarios { get; set; }
     
-        public virtual ObjectResult<string> ConsultarUsuario(string correo, string contrasena)
-        {
-            var correoParameter = correo != null ?
-                new ObjectParameter("Correo", correo) :
-                new ObjectParameter("Correo", typeof(string));
-    
-            var contrasenaParameter = contrasena != null ?
-                new ObjectParameter("Contrasena", contrasena) :
-                new ObjectParameter("Contrasena", typeof(string));
-    
-            return ((IObjectContextAdapter)this).ObjectContext.ExecuteFunction<string>("ConsultarUsuario", correoParameter, contrasenaParameter);
-        }
-    
         public virtual int EliminarBebida(Nullable<int> id_Bebida)
         {
             var id_BebidaParameter = id_Bebida.HasValue ?
@@ -416,6 +403,11 @@ namespace Restaurante_Datos
                 new ObjectParameter("Correo", typeof(string));
     
             return ((IObjectContextAdapter)this).ObjectContext.ExecuteFunction("ModificarUbicacion", id_UbicacionParameter, id_RestauranteParameter, descripcionParameter, telefono1Parameter, telefono2Parameter, correoParameter);
+        }
+    
+        public virtual ObjectResult<MostrarInfoRestaurantes_Result> MostrarInfoRestaurantes()
+        {
+            return ((IObjectContextAdapter)this).ObjectContext.ExecuteFunction<MostrarInfoRestaurantes_Result>("MostrarInfoRestaurantes");
         }
     }
 }

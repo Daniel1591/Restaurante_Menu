@@ -112,6 +112,17 @@
   </ItemGroup>
   <ItemGroup>
     <Content Include="About.aspx" />
+    <Content Include="AdministracionRestaurantes.aspx" />
+    <Content Include="bootstrap-4.3.1-dist\css\bootstrap-grid.css" />
+    <Content Include="bootstrap-4.3.1-dist\css\bootstrap-grid.min.css" />
+    <Content Include="bootstrap-4.3.1-dist\css\bootstrap-reboot.css" />
+    <Content Include="bootstrap-4.3.1-dist\css\bootstrap-reboot.min.css" />
+    <Content Include="bootstrap-4.3.1-dist\css\bootstrap.css" />
+    <Content Include="bootstrap-4.3.1-dist\css\bootstrap.min.css" />
+    <Content Include="bootstrap-4.3.1-dist\js\bootstrap.bundle.js" />
+    <Content Include="bootstrap-4.3.1-dist\js\bootstrap.bundle.min.js" />
+    <Content Include="bootstrap-4.3.1-dist\js\bootstrap.js" />
+    <Content Include="bootstrap-4.3.1-dist\js\bootstrap.min.js" />
     <Content Include="Contact.aspx" />
     <Content Include="Content\bootstrap-theme.css" />
     <Content Include="Content\bootstrap-theme.min.css" />
@@ -132,6 +143,16 @@
     <Content Include="Content\bootstrap.css.map" />
     <Content Include="Content\bootstrap-theme.min.css.map" />
     <Content Include="Content\bootstrap-theme.css.map" />
+    <Content Include="bootstrap-4.3.1-dist\css\bootstrap-grid.css.map" />
+    <Content Include="bootstrap-4.3.1-dist\css\bootstrap-grid.min.css.map" />
+    <Content Include="bootstrap-4.3.1-dist\css\bootstrap-reboot.css.map" />
+    <Content Include="bootstrap-4.3.1-dist\css\bootstrap-reboot.min.css.map" />
+    <Content Include="bootstrap-4.3.1-dist\css\bootstrap.css.map" />
+    <Content Include="bootstrap-4.3.1-dist\css\bootstrap.min.css.map" />
+    <Content Include="bootstrap-4.3.1-dist\js\bootstrap.bundle.js.map" />
+    <Content Include="bootstrap-4.3.1-dist\js\bootstrap.bundle.min.js.map" />
+    <Content Include="bootstrap-4.3.1-dist\js\bootstrap.js.map" />
+    <Content Include="bootstrap-4.3.1-dist\js\bootstrap.min.js.map" />
     <None Include="Scripts\jquery-3.3.1.intellisense.js" />
     <Content Include="Imagenes\FondoLogin.jpg" />
     <Content Include="Imagenes\logo.png" />
@@ -171,6 +192,13 @@
     <Content Include="Site.Mobile.Master" />
   </ItemGroup>
   <ItemGroup>
+    <Compile Include="AdministracionRestaurantes.aspx.cs">
+      <DependentUpon>AdministracionRestaurantes.aspx</DependentUpon>
+      <SubType>ASPXCodeBehind</SubType>
+    </Compile>
+    <Compile Include="AdministracionRestaurantes.aspx.designer.cs">
+      <DependentUpon>AdministracionRestaurantes.aspx</DependentUpon>
+    </Compile>
     <Compile Include="App_Start\BundleConfig.cs" />
     <Compile Include="About.aspx.cs">
       <DependentUpon>About.aspx</DependentUpon>
@@ -250,7 +278,7 @@
   </ItemGroup>
   <ItemGroup>
     <ProjectReference Include="..\Restaurante_Datos\Restaurante_Datos.csproj">
-      <Project>{41efcc3a-1d73-4f2e-93eb-6e8d17e16d16}</Project>
+      <Project>{41EFCC3A-1D73-4F2E-93EB-6E8D17E16D16}</Project>
       <Name>Restaurante_Datos</Name>
     </ProjectReference>
     <ProjectReference Include="..\Restaurante_Logica\Restaurante_Logica.csproj">

@@ -17,7 +17,6 @@ namespace Restaurante_Datos
         [System.Diagnostics.CodeAnalysis.SuppressMessage("Microsoft.Usage", "CA2214:DoNotCallOverridableMethodsInConstructors")]
         public Menu()
         {
-            this.Platos = new HashSet<Plato>();
             this.Restaurantes = new HashSet<Restaurante>();
         }
     
@@ -27,8 +26,6 @@ namespace Restaurante_Datos
     
         public virtual Categoria Categoria { get; set; }
         public virtual Plato Plato { get; set; }
-        [System.Diagnostics.CodeAnalysis.SuppressMessage("Microsoft.Usage", "CA2227:CollectionPropertiesShouldBeReadOnly")]
-        public virtual ICollection<Plato> Platos { get; set; }
         [System.Diagnostics.CodeAnalysis.SuppressMessage("Microsoft.Usage", "CA2227:CollectionPropertiesShouldBeReadOnly")]
         public virtual ICollection<Restaurante> Restaurantes { get; set; }
     }

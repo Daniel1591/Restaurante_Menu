@@ -30,7 +30,7 @@
           <Key>
             <PropertyRef Name="Id_Menu" />
           </Key>
-          <Property Name="Id_Menu" Type="int" StoreGeneratedPattern="Identity" Nullable="false" />
+          <Property Name="Id_Menu" Type="int" Nullable="false" />
           <Property Name="Id_Categorias" Type="int" Nullable="false" />
           <Property Name="Id_Plato" Type="int" />
         </EntityType>
@@ -133,18 +133,6 @@
             </Dependent>
           </ReferentialConstraint>
         </Association>
-        <Association Name="FK_Platos_Menus">
-          <End Role="Menus" Type="Self.Menus" Multiplicity="1" />
-          <End Role="Platos" Type="Self.Platos" Multiplicity="*" />
-          <ReferentialConstraint>
-            <Principal Role="Menus">
-              <PropertyRef Name="Id_Menu" />
-            </Principal>
-            <Dependent Role="Platos">
-              <PropertyRef Name="Id_Menu" />
-            </Dependent>
-          </ReferentialConstraint>
-        </Association>
         <Association Name="FK_Platos_Postres">
           <End Role="Postres" Type="Self.Postres" Multiplicity="0..1" />
           <End Role="Platos" Type="Self.Platos" Multiplicity="*" />
@@ -193,10 +181,6 @@
             </Dependent>
           </ReferentialConstraint>
         </Association>
-        <Function Name="ConsultarUsuario" Aggregate="false" BuiltIn="false" NiladicFunction="false" IsComposable="false" ParameterTypeSemantics="AllowImplicitConversion" Schema="dbo">
-          <Parameter Name="Correo" Type="nvarchar" Mode="In" />
-          <Parameter Name="Contrasena" Type="nvarchar" Mode="In" />
-        </Function>
         <Function Name="EliminarBebida" Aggregate="false" BuiltIn="false" NiladicFunction="false" IsComposable="false" ParameterTypeSemantics="AllowImplicitConversion" Schema="dbo">
           <Parameter Name="Id_Bebida" Type="int" Mode="In" />
         </Function>
@@ -307,6 +291,7 @@
           <Parameter Name="Telefono2" Type="int" Mode="In" />
           <Parameter Name="Correo" Type="nvarchar" Mode="In" />
         </Function>
+        <Function Name="MostrarInfoRestaurantes" Aggregate="false" BuiltIn="false" NiladicFunction="false" IsComposable="false" ParameterTypeSemantics="AllowImplicitConversion" Schema="dbo" />
         <EntityContainer Name="RestauranteModelStoreContainer">
           <EntitySet Name="Bebidas" EntityType="Self.Bebidas" Schema="dbo" store:Type="Tables" />
           <EntitySet Name="Categorias" EntityType="Self.Categorias" Schema="dbo" store:Type="Tables" />
@@ -331,10 +316,6 @@
           </AssociationSet>
           <AssociationSet Name="FK_Platos_Ensaladas" Association="Self.FK_Platos_Ensaladas">
             <End Role="Ensaladas" EntitySet="Ensaladas" />
-            <End Role="Platos" EntitySet="Platos" />
-          </AssociationSet>
-          <AssociationSet Name="FK_Platos_Menus" Association="Self.FK_Platos_Menus">
-            <End Role="Menus" EntitySet="Menus" />
             <End Role="Platos" EntitySet="Platos" />
           </AssociationSet>
           <AssociationSet Name="FK_Platos_Postres" Association="Self.FK_Platos_Postres">
@@ -388,12 +369,11 @@
           <Key>
             <PropertyRef Name="Id_Menu" />
           </Key>
-          <Property Name="Id_Menu" Type="Int32" Nullable="false" annotation:StoreGeneratedPattern="Identity" />
+          <Property Name="Id_Menu" Type="Int32" Nullable="false" />
           <Property Name="Id_Categorias" Type="Int32" Nullable="false" />
           <Property Name="Id_Plato" Type="Int32" />
           <NavigationProperty Name="Categoria" Relationship="Self.FK_Menus_Categorias" FromRole="Menus" ToRole="Categorias" />
           <NavigationProperty Name="Plato" Relationship="Self.FK_Menus_Platos" FromRole="Menus" ToRole="Platos" />
-          <NavigationProperty Name="Platos" Relationship="Self.FK_Platos_Menus" FromRole="Menus" ToRole="Platos" />
           <NavigationProperty Name="Restaurantes" Relationship="Self.FK_Restaurantes_Menus" FromRole="Menus" ToRole="Restaurantes" />
         </EntityType>
         <EntityType Name="Plato">
@@ -413,7 +393,6 @@
           <NavigationProperty Name="Bebida" Relationship="Self.FK_Platos_Bebidas" FromRole="Platos" ToRole="Bebidas" />
           <NavigationProperty Name="Ensalada" Relationship="Self.FK_Platos_Ensaladas" FromRole="Platos" ToRole="Ensaladas" />
           <NavigationProperty Name="Menus" Relationship="Self.FK_Menus_Platos" FromRole="Platos" ToRole="Menus" />
-          <NavigationProperty Name="Menu" Relationship="Self.FK_Platos_Menus" FromRole="Platos" ToRole="Menus" />
           <NavigationProperty Name="Postre" Relationship="Self.FK_Platos_Postres" FromRole="Platos" ToRole="Postres" />
         </EntityType>
         <EntityType Name="Postre">
@@ -517,18 +496,6 @@
             </Dependent>
           </ReferentialConstraint>
         </Association>
-        <Association Name="FK_Platos_Menus">
-          <End Role="Menus" Type="Self.Menu" Multiplicity="1" />
-          <End Role="Platos" Type="Self.Plato" Multiplicity="*" />
-          <ReferentialConstraint>
-            <Principal Role="Menus">
-              <PropertyRef Name="Id_Menu" />
-            </Principal>
-            <Dependent Role="Platos">
-              <PropertyRef Name="Id_Menu" />
-            </Dependent>
-          </ReferentialConstraint>
-        </Association>
         <Association Name="FK_Restaurantes_Menus">
           <End Role="Menus" Type="Self.Menu" Multiplicity="0..1" />
           <End Role="Restaurantes" Type="Self.Restaurante" Multiplicity="*" />
@@ -595,10 +562,6 @@
             <End Role="Platos" EntitySet="Platos" />
             <End Role="Menus" EntitySet="Menus" />
           </AssociationSet>
-          <AssociationSet Name="FK_Platos_Menus" Association="Self.FK_Platos_Menus">
-            <End Role="Menus" EntitySet="Menus" />
-            <End Role="Platos" EntitySet="Platos" />
-          </AssociationSet>
           <AssociationSet Name="FK_Restaurantes_Menus" Association="Self.FK_Restaurantes_Menus">
             <End Role="Menus" EntitySet="Menus" />
             <End Role="Restaurantes" EntitySet="Restaurantes" />
@@ -611,10 +574,6 @@
             <End Role="Restaurantes" EntitySet="Restaurantes" />
             <End Role="Ubicaciones" EntitySet="Ubicaciones" />
           </AssociationSet>
-          <FunctionImport Name="ConsultarUsuario" ReturnType="Collection(String)">
-            <Parameter Name="Correo" Mode="In" Type="String" />
-            <Parameter Name="Contrasena" Mode="In" Type="String" />
-          </FunctionImport>
           <FunctionImport Name="EliminarBebida">
             <Parameter Name="Id_Bebida" Mode="In" Type="Int32" />
           </FunctionImport>
@@ -725,7 +684,13 @@
             <Parameter Name="Telefono2" Mode="In" Type="Int32" />
             <Parameter Name="Correo" Mode="In" Type="String" />
           </FunctionImport>
+          <FunctionImport Name="MostrarInfoRestaurantes" ReturnType="Collection(RestauranteModel.MostrarInfoRestaurantes_Result)" />
         </EntityContainer>
+        <ComplexType Name="MostrarInfoRestaurantes_Result">
+          <Property Type="Int32" Name="Id_Restaurante" Nullable="false" />
+          <Property Type="String" Name="Nombre" Nullable="false" MaxLength="200" />
+          <Property Type="String" Name="Descripcion_Categoria" Nullable="false" MaxLength="50" />
+        </ComplexType>
       </Schema>
     </edmx:ConceptualModels>
     <!-- C-S mapping content -->
@@ -821,7 +786,6 @@
               </MappingFragment>
             </EntityTypeMapping>
           </EntitySetMapping>
-          <FunctionImportMapping FunctionImportName="ConsultarUsuario" FunctionName="RestauranteModel.Store.ConsultarUsuario" />
           <FunctionImportMapping FunctionImportName="EliminarBebida" FunctionName="RestauranteModel.Store.EliminarBebida" />
           <FunctionImportMapping FunctionImportName="EliminarCategoria" FunctionName="RestauranteModel.Store.EliminarCategoria" />
           <FunctionImportMapping FunctionImportName="EliminarEnsalada" FunctionName="RestauranteModel.Store.EliminarEnsalada" />
@@ -846,6 +810,15 @@
           <FunctionImportMapping FunctionImportName="ModificarPostre" FunctionName="RestauranteModel.Store.ModificarPostre" />
           <FunctionImportMapping FunctionImportName="ModificarRestaurante" FunctionName="RestauranteModel.Store.ModificarRestaurante" />
           <FunctionImportMapping FunctionImportName="ModificarUbicacion" FunctionName="RestauranteModel.Store.ModificarUbicacion" />
+          <FunctionImportMapping FunctionImportName="MostrarInfoRestaurantes" FunctionName="RestauranteModel.Store.MostrarInfoRestaurantes">
+            <ResultMapping>
+              <ComplexTypeMapping TypeName="RestauranteModel.MostrarInfoRestaurantes_Result">
+                <ScalarProperty Name="Id_Restaurante" ColumnName="Id_Restaurante" />
+                <ScalarProperty Name="Nombre" ColumnName="Nombre" />
+                <ScalarProperty Name="Descripcion_Categoria" ColumnName="Descripcion_Categoria" />
+              </ComplexTypeMapping>
+            </ResultMapping>
+          </FunctionImportMapping>
         </EntityContainerMapping>
       </Mapping>
     </edmx:Mappings>

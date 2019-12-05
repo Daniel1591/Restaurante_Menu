@@ -6,7 +6,7 @@ using System.Threading.Tasks;
 
 namespace Restaurante_Logica
 {
-    class Administracion_General_Restaurantes
+    public class Administracion_General_Restaurantes
     {
         Restaurante_Datos.RestauranteEntities conexionBD = new Restaurante_Datos.RestauranteEntities();
 
@@ -52,13 +52,10 @@ namespace Restaurante_Logica
             }
         }
 
-        public static List<Restaurante_Datos.Restaurante> mostrarRestaurantes()
+        public object mostrarRestaurantes()
         {
-            using (Restaurante_Datos.RestauranteEntities BD = new Restaurante_Datos.RestauranteEntities())
-            {
-
-                return BD.Restaurantes.ToList();
-            }
+            return conexionBD.MostrarInfoRestaurantes();
         }
+
     }
 }
