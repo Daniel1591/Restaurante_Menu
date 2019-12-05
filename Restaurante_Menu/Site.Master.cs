@@ -35,11 +35,11 @@ namespace Restaurante_Menu
 
                     
                     Dashboard.Visible = false;
-                    //IniciarSesion.Visible = true;
+                    
                 }
                     else
 
-                    //Dashboard.Visible = true;
+                    
                     IniciarSesion.Visible = false;
 
             }

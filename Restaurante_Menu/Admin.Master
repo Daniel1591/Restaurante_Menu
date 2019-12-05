@@ -18,13 +18,17 @@
     <asp:ContentPlaceHolder ID="head" runat="server">
     </asp:ContentPlaceHolder>
 </head>
-<body id="page-top">
+<body id="page-top" >
     <nav class="navbar navbar-expand navbar-dark bg-dark static-top">
 
     <a class="navbar-brand mr-1" href="/">Restaurantes</a>
-       
-         <%--<asp:Button runat="server" ID="btnCerrar" Text="Cerrar Sesion" CssClass="navbar-Iniciar mr-iniciar"  />--%>
- <a class="navbar-Iniciar mr-iniciar"  href="Default.aspx">Cerrar Sesion</a>
+      
+            
+             
+            
+         
+      
+ <%--<a class="navbar-Iniciar mr-iniciar" id="cerrar" runat="server" href="Default.aspx"  >Cerrar Sesion</a>--%>
 
 
     <!-- Navbar -->
@@ -58,6 +62,9 @@
       <div class="container-fluid">
 
     <form id="form1" runat="server">
+       
+       <asp:LinkButton ID="cerraSesion" CssClass="cerraSesion" runat="server" OnClick="cerraSesion_Click">Cerrar Session</asp:LinkButton>
+
         <asp:ContentPlaceHolder ID="ContentPlaceHolder1" runat="server">
         </asp:ContentPlaceHolder>
     </form>
