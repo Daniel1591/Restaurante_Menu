@@ -33,7 +33,7 @@ namespace Restaurante_Menu
                     if (usuarios.validaCredenciales(this.txtEmail.Text, this.txtClave.Text, out usuario))
                     {
                         Page.Session.Add("sesion", usuario);
-
+                      
                         Response.Redirect("~/Dashboard.aspx");
                     }
                     else
