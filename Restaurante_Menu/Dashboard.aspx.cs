@@ -16,8 +16,13 @@ namespace Restaurante_Menu
 
         protected void Page_Load(object sender, EventArgs e)
         {
+
             cargarTabla();
+
+            Session.Remove("id");
             btnEliminar.Enabled = false;
+            btnEditar.Enabled = false;
+            btnInsertar.Enabled = true;
         }
 
         private void cargarTabla()
@@ -32,16 +37,30 @@ namespace Restaurante_Menu
             index = gvRestaurantes.SelectedRow.RowIndex;
 
             btnEliminar.Enabled = true;
+            btnEditar.Enabled = true;
+            btnInsertar.Enabled = false;
 
-            Label lbRecuperacion = gvRestaurantes.Rows[index].FindControl("lbIdRestaurante") as Label;
-            Session["id"] = Convert.ToInt32(lbRecuperacion.Text);
+            Label lbId = gvRestaurantes.Rows[index].FindControl("lbIdRestaurante") as Label;
+            Session["id"] = Convert.ToInt32(lbId.Text);
         }
 
         protected void btnEliminar_Click(object sender, EventArgs e)
         {
 
             conexion.eliminarRestaurantes(Convert.ToInt32(Session["id"]));
+            // Mostrar mensaje de eliminado correctamente.
             cargarTabla();
+            Session.Remove("id");
+        }
+
+        protected void btnEditar_Click(object sender, EventArgs e)
+        {
+            Response.Redirect("~/EditarRestaurante.aspx");
+        }
+
+        protected void btnInsertar_Click(object sender, EventArgs e)
+        {
+            Response.Redirect("~/EditarRestaurante.aspx");
         }
 
     }

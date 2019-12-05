@@ -35,8 +35,11 @@
                 </Columns>
             </asp:GridView>
         </div>
-        <div class="img-thumbnail" style="padding: 10px">
-            <asp:Button ID="btnEliminar" runat="server" CssClass="form-control btn btn-primary" Text="Eliminar Registro" OnClick="btnEliminar_Click" />
+        <div class="img-thumbnail" style="padding-top: 10px; padding-left: 50px; padding-right: 50px; text-align:center">
+            <asp:Button ID="btnEliminar" runat="server" CssClass="btn btn-info" Text="Eliminar Restaurante" OnClick="btnEliminar_Click" />
+            <asp:Button ID="btnEditar" runat="server" CssClass="btn btn-info" Text="Editar Restaurante" OnClick="btnEditar_Click"/>
+            <asp:Button ID="btnInsertar" runat="server" CssClass="btn btn-info" Text="Insertar Restaurante" OnClick="btnInsertar_Click"/>
+        
         </div>
     </div>
 </asp:Content>
