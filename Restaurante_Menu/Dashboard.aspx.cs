@@ -19,7 +19,6 @@ namespace Restaurante_Menu
 
             cargarTabla();
 
-            Session.Remove("id");
             btnEliminar.Enabled = false;
             btnEditar.Enabled = false;
             btnInsertar.Enabled = true;

@@ -77,6 +77,8 @@ namespace Restaurante_Menu
                     );
                 }
 
+                Session.Remove("id");
+
                 // Mostrar mensaje de salvado correctamente.
                 Response.Redirect("~/Dashboard.aspx");
             }
