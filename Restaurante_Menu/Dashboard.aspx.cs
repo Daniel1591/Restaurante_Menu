@@ -16,9 +16,9 @@ namespace Restaurante_Menu
 
         protected void Page_Load(object sender, EventArgs e)
         {
-
             cargarTabla();
 
+            Session["EnProceso"] = false;
             btnEliminar.Enabled = false;
             btnEditar.Enabled = false;
             btnInsertar.Enabled = true;
@@ -54,6 +54,7 @@ namespace Restaurante_Menu
 
         protected void btnEditar_Click(object sender, EventArgs e)
         {
+            Session["EnProceso"] = true;
             Response.Redirect("~/EditarRestaurante.aspx");
         }
 

@@ -26,7 +26,7 @@ namespace Restaurante_Menu
         private void cargarRestaurante()
         {
 
-            if (Session["id"] != null)
+            if (Session["id"] != null && Session["EnProceso"].Equals(true))
             {
                 int Identificador = int.Parse(Session["id"].ToString());
                 var restaurante = this.restaurantes.ObtenRestaurantePorIdentificador(Identificador);
