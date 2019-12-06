@@ -122,6 +122,7 @@
     <Content Include="Dashboard.aspx" />
     <Content Include="Default.aspx" />
     <Content Include="EditarRestaurante.aspx" />
+    <Content Include="eliminarSesion.aspx" />
     <Content Include="favicon.ico" />
     <Content Include="fonts\glyphicons-halflings-regular.svg" />
     <Content Include="Global.asax" />
@@ -1793,6 +1794,13 @@
     </Compile>
     <Compile Include="EditarRestaurante.aspx.designer.cs">
       <DependentUpon>EditarRestaurante.aspx</DependentUpon>
+    </Compile>
+    <Compile Include="eliminarSesion.aspx.cs">
+      <DependentUpon>eliminarSesion.aspx</DependentUpon>
+      <SubType>ASPXCodeBehind</SubType>
+    </Compile>
+    <Compile Include="eliminarSesion.aspx.designer.cs">
+      <DependentUpon>eliminarSesion.aspx</DependentUpon>
     </Compile>
     <Compile Include="Global.asax.cs">
       <DependentUpon>Global.asax</DependentUpon>
